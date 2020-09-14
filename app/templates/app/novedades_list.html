@@ -13,8 +13,8 @@
 
 <div class="page-content">
 	<div class="col-md-12">
-		{% if publicaciones %}<!-- if publicaciones para la funcion def PublicacionesView-->
-			{% for publicacion in publicaciones %}<!-- for publicacion in publicaciones -->
+		{% if publicaciones or novedades %}
+			{% for publicacion in publicaciones %}
 				<div class="card col-md-3 novedades">
 					<div class="image-content">
 						<img alt="" src="{{ publicacion.imagen.thumbnail.url }}" class="card-img-top img-thumbnail"/>
@@ -41,8 +41,8 @@
 			<div class="alert alert-info">No existen publicaciones...</div>
 		{% endif %}
 
-		{% if novedades %}<!-- if novedad_list para la funcion def PublicacionesView-->
-			{% for novedad in novedades %}<!-- for publicacion in publicaciones -->
+		<!-- {% if novedades %}
+			{% for novedad in novedades %}
 				<div class="card col-md-3 novedades">
 					<div class="image-content">
 						<img alt="" src="{{ novedad.imagen.thumbnail.url }}" class="card-img-top img-thumbnail"/>
@@ -67,7 +67,7 @@
 			{% endfor %}
 		{% else %}
 			<div class="alert alert-info">No existen novedades...</div>
-		{% endif %}
+		{% endif %} -->
 	</div>
 </div>
 {% endblock %}
