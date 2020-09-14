@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Proyecto {% endblock %}
+
+{% block content %}
+ <h1>{{proyecto.titulo_espanol}}</h1>
+<hr>
+<div class="row">
+
+    <div class="col-md-12 ">{{proyecto.descripcion_espanol|safe}}<p></p> </div>
+        
+    <div class="col-md-12 ">
+        <a class="btn btn-default" role="button" target="_blank" href="http://iiep-baires.econ.uba.ar/uploads/publicaciones/{{proyecto.id}}/archivos/1.pdf"><i class="glyphicon glyphicon-download-alt"></i>  Descargar archivo</a>
+
+    </div>
+</div>
+{% endblock %}

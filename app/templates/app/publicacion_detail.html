@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Detalles {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li><a href="{% url 'app:publicaciones-list' %}">Publicaciones MESI</a></li>
+	<li class="active">{{ publicacion.titulo }}</li>
+</ol>
+
+<h1>{{ publicacion.titulo }}</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-12" >
+		<div class="col-md-4">
+			<div class="image-content-detail">
+			{% if publicacion.imagen %}
+				<a href="{{ publicacion.imagen.url }}"><img alt="" src="{{ publicacion.imagen.url }}" class="card-img-top img-thumbnail"/></a>
+			{% else %}
+				<img src="/media/investigadores/img/avatar/male.png" alt="Avatar" class="card-img-top img-thumbnail">
+			{% endif %}
+			</div>
+		</div>
+		<div class="col-md-8 fecha-publicacion">
+			<p><strong>{{ publicacion.fecha }}</strong></p>
+			<p><strong>Autores: </strong>
+				{% for autor in publicacion.autores.all %}
+					<span>{{ autor }},</span>
+				{% endfor %}
+			</p>
+			<p><strong>Copete: </strong>{{ publicacion.copete|safe }}</p>
+			<p><strong>Desarrollo: </strong>{{ publicacion.desarrollo|safe }}</p>
+			<p><strong>Inv. asociados: </strong>
+				{% for asociado in publicacion.asociados.all %}
+					<span>{{ asociado }},</span>
+				{% endfor %}
+			</p>
+			<p><strong>Archivos: </strong>
+				{% if publicacion.archivo %}
+					<a target="_blank" class="btn btn-default" role="button" href="{{ publicacion.archivo.url }}">
+						<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
+					</a>
+				{% endif %}
+			</p>
+			<p><strong>Video: </strong>
+				{% if publicacion.video %}
+					<video name='video' controls autoplay width='50%' height='40%'>
+						<source src="{{ publicacion.video.url }}" type="video/mp4"></source>
+					</video>
+				{% endif %}
+			</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

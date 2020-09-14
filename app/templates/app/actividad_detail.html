@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Detalles {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li><a href="{% url 'app:actividades-list' %}">Actividades MESI</a></li>
+	<li class="active">{{ actividad.fecha_inicio }}</li>
+</ol>
+
+<h1>Lugar: {{ actividad.lugar }}</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-12" >
+		<div class="actividades col-md-12 card">
+			<span class="fecha">
+				<strong>{{actividad.fecha_inicio|date:'Y-m-d' }} - {{actividad.hora_inicio}}</strong>
+			</span>
+			<div class="atividad-name-home"><strong>
+				<span>{{actividad.lugar}} </span></strong><br>
+				<span aria-hidden="true">
+					{{actividad.desarrollo|striptags|safe|truncatechars:"100"}}
+				</span><br>
+			</div>
+			<hr>
+		</div>
+	</div>
+</div>
+{% endblock %}

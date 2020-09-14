@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Proyectos IIEP {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="#/">Inicio</a></li>
+	<li class="active">Proyectos IIEP</li>
+ </ol>
+  <h1>Proyectos IIEP</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-md-12">
+        {% if proyectos %}
+		{% for proyecto in proyectos %}
+
+        	<div class="col-md-12">
+				<h4><a href="{{ proyecto.get_absolute_url }}">{{proyecto.titulo_espanol}} </a></h4>
+				<h5 >{{proyecto.last_update_date}}</h5>	
+		
+				<p class="project-description">{{proyecto.descripcion_espanol|safe|truncatechars:200}}
+					<br>
+					--------------------------
+				</p>
+				<p style="display: none;"> <span><a href="{{ proyecto.get_absolute_url }}">Leer más...</a></span></p>
+			</div>
+		{% endfor %}
+        {% endif %}
+
+    </div>
+
+
+	<div class="col-sm-12">
+        {% if proyectos.has_other_pages %}
+      <ul class="pagination">
+        {% if proyectos.has_previous %}
+          <li><a href="?page={{ proyectos.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in proyectos.paginator.page_range %}
+          {% if proyectos.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if proyectos.has_next %}
+          <li><a href="?page={{ proyectos.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

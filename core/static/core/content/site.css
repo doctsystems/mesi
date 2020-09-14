@@ -1,0 +1,64 @@
+
+.logo1 {
+    max-width: 200px;
+    float: left;
+    margin-left: 85px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.logo2{
+    max-width: 300px;
+    margin-top: 25px;
+}
+.redes-head {
+    float: right;
+    padding-top: 30px;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.navbar{
+    border-radius:0 !important;
+}
+.navbar-inverse {
+    background:#002a4c;
+    color: #ffffff;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    background-color: transparent;
+}
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 600px;
+
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}

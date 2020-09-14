@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Publicaiones {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li class="active">Publicaciones</li>
+</ol>
+<h1>Publicaciones MESI</h1>
+<hr>
+
+<div class="page-content">
+	<div class="col-md-12">
+		{% if publicaciones %}<!-- publicaciones_list > class view o if publicaciones > def view -->
+			{% for publicacion in publicaciones %}
+				<div class="card col-md-3 publicaciones">
+					<div class="image-content">
+						<img alt="" src="{{ publicacion.imagen.thumbnail.url }}" class="card-img-top img-thumbnail"/>
+					</div>
+					<div class="card-body">
+						<h3 class="card-title">
+							<a href="{{ publicacion.get_absolute_url }}">
+								{{ publicacion.titulo }}
+							</a>
+						</h3>
+						<h5 class="card-title">
+							Categoria: {{ publicacion.categoria }}
+						</h5>
+						<div class="date">
+							{% for autor in publicacion.autores.all %}
+								<span>{{ autor }},</span>
+							{% endfor %}
+						</div>
+						{% if publicacion.copete %}
+							<p>{{publicacion.copete|striptags|safe|truncatechars:"200"}}</p>
+						{% else %}
+							<p>{{publicacion.desarrollo|striptags|safe|truncatechars:"200"}}</p>
+						{% endif %}
+						<p><a href="{{ publicacion.get_absolute_url }}">
+							<strong>Continuar leyendo...</strong> 
+							</a>
+						</p>
+					</div>
+				</div>
+			{% endfor %}
+		{% else %}
+			<div class="alert alert-info">No existen publicaciones...</div>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

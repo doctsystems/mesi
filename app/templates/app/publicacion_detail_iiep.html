@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Publicacion IIEP {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="{% url 'core:home' %}">Inicio</a></li>
+    <li><a href="{% url 'app:publicaciones-iiep' %}">Publicaciones IIEP</a></li>
+
+	<li class="active">{{publicacion.titulo_espanol}}</li>
+  </ol>
+  <h1>{{publicacion.titulo_espanol}}</h1>
+<hr>
+
+<div class="page-content row">
+<div class="col-12" >
+
+    <div class="col-md-4">
+        <img style="width: 100%;" src="http://iiep-baires.econ.uba.ar/uploads/publicaciones/{{publicacion.id}}/imagenes/1_ficha.jpg" alt="">
+       
+    </div>
+
+    <div class="col-md-8 fecha-publicacion">
+      
+        <p> <strong>{{publicacion.fecha|date:'Y-m-d'}}</strong></p>
+        <p>{{publicacion.texto_espanol|safe}}</p>
+
+        <p>
+        <a target="_blank" class="btn btn-default" role="button" href="http://iiep-baires.econ.uba.ar/uploads/publicaciones/{{publicacion.id}}/archivos/1.pdf"><i class="glyphicon glyphicon-download-alt"></i> Descargar archivo</a></p>
+    </div>
+    
+</div>
+
+</div>
+
+{% endblock %}

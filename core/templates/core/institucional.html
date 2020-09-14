@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Institucional {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li class="active">Sobre MESI </li>
+</ol>
+<div class="row inst">
+	<div class="col-12">
+		<div class="col-md-2" ><img src="{% static 'core/img/logo.jpg' %}" width="100%"></div>
+        <div class="col-md-10" >
+{% if configuracion %}
+	{% for conf in configuracion %}
+		<h1 style="margin-top: 0; padding-top:0;">MESI<br>
+			<small>{{conf.titulo|truncatechars:"50"}}</small>      
+		</h1>
+		</div>
+		{% if conf.copete %}
+			<p class="lead" >{{conf.copete|safe}}</p>
+		{% else %}
+			<p class="lead" >{{conf.desarrollo|safe}}</p>
+		{% endif %}
+	{% endfor %}
+{% else %}
+	<h1>MESI<br>
+		<small>Debe configurar el sitio...</small>
+	</h1>
+{% endif %}
+
+</div>
+	</div>
+</div>
+{% endblock %}

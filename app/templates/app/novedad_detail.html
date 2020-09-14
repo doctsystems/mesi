@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Detalles {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li><a href="{% url 'app:novedades-list' %}">Novedades MESI</a></li>
+	<li class="active">{{ novedad.titulo }}</li>
+</ol>
+
+<h1>{{ novedad.titulo }}</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-12" >
+		<div class="col-md-4">
+			<div class="image-content-detail">
+			{% if novedad.imagen %}
+				<a href="{{ novedad.imagen.url }}"><img alt="" src="{{ novedad.imagen.url }}" class="card-img-top img-thumbnail"/></a>
+			{% endif %}
+			</div>
+		</div>
+		<div class="col-md-8 fecha-publicacion">
+			<p><strong>Fecha: {{ novedad.fecha }}</strong></p>
+			<p><strong>Link: </strong><a href="{{ novedad.link }}" target="_blank">{{ novedad.link }}</a></p>
+			<p><strong>Copete: </strong>{{ novedad.copete|safe }}</p>
+			<p><strong>Desarrollo: </strong>{{ novedad.desarrollo|safe }}</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

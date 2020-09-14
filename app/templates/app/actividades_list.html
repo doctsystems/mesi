@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Actividades {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li class="active">Actividades</li>
+</ol>
+<h1>Actividades MESI</h1>
+<hr>
+
+<div class="page-content">
+	<div class="col-md-12">
+		{% if actividad_list %}
+			{% for actividad in actividad_list %}
+				<div class="actividades col-md-12 card">
+					<span class="fecha">
+						<strong>{{actividad.fecha_inicio|date:'Y-m-d' }} - {{actividad.hora_inicio}}</strong>
+					</span>
+					<div class="atividad-name-home"><strong>
+						<span>{{actividad.lugar}} </span></strong><br>
+						<span aria-hidden="true">
+							{{actividad.desarrollo|striptags|safe|truncatechars:"300"}}
+						</span><br>             
+					</div>
+					<hr>
+				</div>
+			{% endfor %}
+		{% else %}
+			<div class="alert alert-info">No existen actividades...</div>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

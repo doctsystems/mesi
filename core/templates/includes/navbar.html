@@ -1,0 +1,71 @@
+{% load static %}
+
+  <div class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="{% url 'core:home' %}"><i class="fa fa-home"></i></a></li>
+          <li><a href="{% url 'core:institucional' %}">INSTITUCIONAL</a></li>
+          <li><a href="{% url 'app:investigadores-list' %}">INVESTIGADORES</a></li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PROYECTOS</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'app:proyectos-iiep' %}">PROYECTOS IIEP</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'app:proyectos-list' %}">PROYECTOS MESI</a>
+            </div>                                        
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACTIVIDADES</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'app:actividades-iiep' %}">ACTIVIDADES IIEP</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'app:actividades-list' %}">ACTIVIDADES MESI</a>
+            </div>                                        
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PUBLICACIONES</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'app:publicaciones-iiep' %}">PUBLICACIONES IIEP</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'nn' %}">PUBLICACIONES MESI</a>
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'not' %}">NOTAS</a>
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'inf' %}">INFORMES TECNICOS</a>
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'pub' %}">PUBLICACIONES ACADEMICAS</a>
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'tes' %}">TESIS</a>
+            </div>                                        
+          </li>
+          <li><a href="{% url 'app:novedades-list' %}">NOVEDADES</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">DATOS</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'app:datos-list' %}">ENERGIA Y AMBIENTE</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="">DATOS SECTORIALES</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="">DATOS MATRICIALES</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="">COMERCIO</a>
+            </div>                                        
+          </li>
+          <li><a href="{% url 'core:contacto' %}">CONTACTO</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>

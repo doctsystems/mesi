@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Contacto {% endblock %}
+
+{% block content %}
+
+<div class="col">
+    <!-- Formulario de contacto -->
+    {% if 'ok' in request.GET %}
+        <div class="alert alert-success alert-dismissible show" role="alert">
+          <strong>Holy guacamole!</strong> Mensaje enviado correctamente.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    {% endif %}
+    <h3>Formulario de Contacto</h3><hr></br>
+    <form action="" method="POST" class="row justify-content-md-center">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Nombre *</label>
+            {{form.name}}
+            {% if form.name.errors%}
+                <div class="alert alert-danger" role="alert">{{form.name.errors}}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="email">Email *</label>
+            {{form.email}}
+            {% if form.email.errors%}
+                <div class="alert alert-danger" role="alert">{{form.email.errors}}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="text">Mensaje *</label>
+            {{form.content}}
+            {% if form.content.errors%}
+                <div class="alert alert-danger" role="alert">{{form.content.errors}}</div>
+            {% endif %}
+        </div>
+        <input type="submit" class="btn btn-primary btn-block py-2" value="Enviar">
+    </form>
+
+</div>
+
+{% endblock %}

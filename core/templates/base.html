@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} MESI - Home {% endblock %}</title>
+   
+    <link rel="stylesheet" type="text/css" href="{% static 'core/content/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'core/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'core/content/animate.css' %}" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'core/content/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'core/content/site.css' %}" />
+    {% block css_extra %}{% endblock %}
+    
+</head>
+
+<body>
+  <div>
+    <div class="row justify-content-between align-items-center" style="margin:0px;">
+      <div class="col-6 col-md-4 text-left">
+        <a class="text-muted" href="/">
+          <!-- <img class="img-fluid logo2 " src="http://iiep-baires.econ.uba.ar/images/logo.png" style="" alt="Instituto de Investigaciones EconÃ³micas"> -->
+          <img class="img-fluid logo2 " src="{% static 'core/img/logo.jpg' %}" style="" alt="Instituto de Investigaciones Económicas">
+        </a>
+      </div>
+      <div class="col-6 col-md-4 text-right text-md-center">
+        <a href="/">
+          <img src="http://iiep-baires.econ.uba.ar/images/brabd_new.png" class="img-fluid logo1" alt="Instituto de Investigaciones Economicas">
+        </a>
+      </div>
+      <div class="col-12 col-md-4 text-right">
+        <ul class="list-inline text-center text-md-right redes-head" style="margin: 5px">
+          <li class="list-inline-item">Seguínos en:</li>
+          <li class="list-inline-item"><a href="https://twitter.com/iiep_oficial" target="_blank" class="btn btn-light btn-sm active" style="border-radius: 40px;" role="button" aria-pressed="true"><i class="fa fa-twitter"></i></a></li>
+          <li class="list-inline-item"><a href="https://www.instagram.com/iiep_oficial/" class="btn btn-light btn-sm active" target="_blank" style="border-radius: 40px;" role="button" aria-pressed="true"><i class="fa fa-instagram"></i></a></li>
+          <li class="list-inline-item"><a href="#" class="btn btn-light btn-sm active" style="border-radius: 40px;" role="button" aria-pressed="true"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+          <!-- <li><a href="/admin/">Iniciar Sesion</a></li> -->
+          {% if not request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/">Iniciar sesión</a>
+            </li>
+          {% else %}
+            <!-- <li class="nav-item">
+              Bienvenido <a class="nav-link" href="#">{{ user.username }} !</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'core:logout' %}">Logout</a>
+            </li> -->
+            <li class="nav-item dropdown">
+              Bienvenido <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }} !</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Perfil</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'admin:index' %}">Dasboard</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'core:logout' %}">Cerrar sesión</a>
+              </div>
+            </li>
+            <li class="list-inline-item"><a href="/admin/logout/" class="btn btn-light btn-sm active" style="border-radius: 40px;" role="button" aria-pressed="true"><i class="fa fa-close" aria-hidden="true"></i></a>
+            </li>
+          {% endif %}
+
+        </ul>
+      </div>
+     </div>
+  </div>
+
+  {% include 'includes/navbar.html' %}
+
+  <div class="body-content container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  {% include 'includes/footer.html' %}
+
+  <script src="{% static 'core/scripts/modernizr-2.6.2.js' %}"></script>
+  <script src="{% static 'core/scripts/jquery-1.10.2.js' %}"></script>
+  <script src="{% static 'core/scripts/bootstrap.js' %}"></script>
+  <script src="{% static 'core/scripts/respond.js' %}"></script>
+  {% block js_extra %}{% endblock %}
+
+</body>
+</html>

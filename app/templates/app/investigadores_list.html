@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Investigadores {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li class="active">Investigadores</li>
+</ol>
+
+<div class="row integrantes">
+	<h2>Investigadores de MESI</h2>
+	<hr>
+	{% if investigador_list %}
+		{% for investigador in investigador_list %}
+			<div class="col-md-4 integrante" style="max-width:32%;">
+				<a href="{{ investigador.get_absolute_url }}">
+					<div class="img-integrante col-md-4">
+						{% if investigador.avatar %}
+						<img src="{{ investigador.avatar.url }}" alt="Avatar" style="border-radius: 50%;">
+						{% else %}
+						<img src="/media/investigadores/img/avatar/male.png" alt="Avatar">
+						{% endif %}
+					</div>
+					<div class="info-integrante col-md-8">
+						<h4>{{ investigador }}</h4>              
+						<p>{{ investigador.perfil }}</p>
+						<p>{{ investigador.get_tipo_display }}</p>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+	{% else %}
+		<div class="alert alert-info">No existen investigadores...</div>
+	{% endif %}
+</div>
+
+{% include 'includes/paginacion.html' %}
+
+{% endblock %}

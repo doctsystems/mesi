@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Detalles {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li><a href="{% url 'app:proyectos-list' %}">Proyectos MESI</a></li>
+	<li class="active">{{ proyecto.titulo }}</li>
+</ol>
+
+<h1>{{ proyecto.titulo }}</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-12" >
+		<div class="col-md-4">
+			<p><strong>Fecha de Inicio: </strong>{{ proyecto.fecha_inicio }}</p>
+			<p>
+				{% if proyecto.fecha_final %}
+					<strong>Archivos: </strong>
+					{{ proyecto.fecha_final }}
+				{% endif %}
+			</p>
+		</div>
+		<div class="col-md-8 fecha-proyecto">
+			<p><strong>Autores: </strong>
+				{% for autor in proyecto.autores.all %}
+					<span>{{ autor }},</span>
+				{% endfor %}
+			</p>
+			<p><strong>Copete: </strong>{{ proyecto.copete|safe }}</p>
+			<p><strong>Desarrollo: </strong>{{ proyecto.desarrollo|safe }}</p>
+			<p><strong>Inv. asociados: </strong>
+				{% for asociado in proyecto.asociados.all %}
+					<span>{{ asociado }},</span>
+				{% endfor %}
+			</p>
+			<p><strong>Archivos: </strong>
+				{% if proyecto.archivo %}
+					<a target="_blank" class="btn btn-default" role="button" 
+						href="{{ proyecto.archivo.url }}">
+						<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
+					</a>
+				{% endif %}
+			</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

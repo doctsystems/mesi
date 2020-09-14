@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Actividades IIEP {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'core:home' %}">Inicio</a></li>
+  <li class="active">Actividades IIEP</li>
+</ol>
+<h1>Actividades IIEP</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-md-12">
+  {% if eventos %}
+		{% for evento in eventos %}
+			<div class="col-md-7 col-md-offset-2" style="margin-bottom: 5px;">
+				<h4>{{evento.fecha|date:'Y-m-d'}} al {{evento.fecha_hasta}}</h4>
+				<h2><a href="{{ evento.get_absolute_url }}">{{evento.titulo_espanol}}</a> </h2>	
+				<!-- <p>{{evento.texto_espanol|striptags|safe|truncatechars:"300"}}</p> -->
+        <p>{{evento.texto_espanol|safe}}</p>
+				<p >
+          <span class="glyphicon glyphicon-time" aria-hidden="true"></span>{{evento.hora}} Hs.<br>
+          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{evento.lugar}} </p>
+				<p >--------------------------</p>
+			</div>
+		{% endfor %}
+  {% endif %}
+  </div>
+</div>
+
+<div class="row">
+ <div class="col-md-12">
+        {% if eventos.has_other_pages %}
+      <ul class="pagination">
+        {% if eventos.has_previous %}
+          <li><a href="?page={{ eventos.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in eventos.paginator.page_range %}
+          {% if eventos.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if eventos.has_next %}
+          <li><a href="?page={{ eventos.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

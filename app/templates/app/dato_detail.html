@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - DAtos {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li><a href="{% url 'app:datos-list' %}">Datos - MESI</a></li>
+	<li class="active">{{ dato.titulo }}</li>
+</ol>
+
+<h1>{{ dato.titulo }}</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-12" >
+		<div class="col-md-4">
+			<p><strong>Fecha: </strong>{{ dato.fecha }}</p>
+		</div>
+		<div class="col-md-8 fecha-dato">
+			<p><strong>Autores: </strong>
+				{% for autor in dato.autores.all %}
+					<span>{{ autor }},</span>
+				{% endfor %}
+			</p>
+			<p><strong>Copete: </strong>{{ dato.copete|safe }}</p>
+			<p><strong>Desarrollo: </strong>{{ dato.desarrollo|safe }}</p>
+			<p><strong>Inv. asociados: </strong>
+				{% for asociado in dato.asociados.all %}
+					<span>{{ asociado }},</span>
+				{% endfor %}
+			</p>
+			<p><strong>Archivos: </strong>
+				{% if dato.archivo %}
+					<a target="_blank" class="btn btn-default" role="button" 
+						href="{{ dato.archivo.url }}">
+						<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
+					</a>
+				{% endif %}
+			</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

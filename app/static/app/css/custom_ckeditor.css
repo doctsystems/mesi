@@ -1,0 +1,5 @@
+.django-ckeditor-widget, .cke_editor_id_desarrollo, .cke_editor_id_copete {
+    width: 100% !important;
+    max-width: 800px !important;
+    resize: none;
+}

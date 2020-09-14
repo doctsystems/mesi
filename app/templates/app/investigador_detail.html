@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Detalles {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li><a href="{% url 'app:investigadores-list' %}">Investigadores MESI</a></li>
+	<li class="active">{{ investigador }}</li>
+</ol>
+
+<h1>{{ investigador }}</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-12" >
+		<div class="col-md-4">
+			{% if investigador.avatar %}
+			<img src="{{ investigador.avatar.url }}" alt="Avatar" style="width: 50%; border-radius: 50%;">
+			{% else %}
+			<img src="/media/investigadores/img/avatar/male.png" alt="Avatar" style="width: 50%;">
+			{% endif %}
+		</div>
+		<div class="col-md-8 fecha-publicacion">
+			<p><strong>Perfil: </strong>{{ investigador.perfil }}</p>
+			<p><strong>Tipo: </strong>{{ investigador.tipo_investigador }}</p>
+			<p><strong>Link: </strong>{{ investigador.link }}</p>
+		</div>
+	</div>
+</div>
+{% endblock %}
