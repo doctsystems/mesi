@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load timetags %}
 
 {% block title %} MESI - Actividades IIEP {% endblock %}
 
@@ -16,7 +17,13 @@
   {% if eventos %}
 		{% for evento in eventos %}
 			<div class="col-md-7 col-md-offset-2" style="margin-bottom: 5px;">
-				<h4>{{evento.fecha|date:'Y-m-d'}} al {{evento.fecha_hasta}}</h4>
+        <h4>Del <b>{{evento.fecha|timestamp_to_date}}</b> al 
+          {% if evento.fecha_hasta %}
+            <b>{{evento.fecha_hasta|timestamp_to_date}}</b>
+          {% else %}
+            <b>{{evento.fecha|timestamp_to_date}}</b>
+          {% endif %}
+        </h4>
 				<h2><a href="{{ evento.get_absolute_url }}">{{evento.titulo_espanol}}</a> </h2>	
 				<!-- <p>{{evento.texto_espanol|striptags|safe|truncatechars:"300"}}</p> -->
         <p>{{evento.texto_espanol|safe}}</p>
