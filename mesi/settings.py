@@ -55,14 +55,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mesi.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    # 'default': config('DATABASE_URL_1', cast=db_url),
+    'default': config('DATABASE_URL_1', cast=db_url),
     'iiep': config('DATABASE_URL_2', cast=db_url),
 }
-# DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
 DATABASES['iiep']['ENGINE'] = 'django.db.backends.mysql'
 
 AUTH_PASSWORD_VALIDATORS = [
