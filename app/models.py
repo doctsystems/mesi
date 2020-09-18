@@ -23,6 +23,7 @@ class Investigador(ModeloBase):
 	link = models.URLField(max_length = 200, help_text="Link al perfil privado")
 
 	class Meta:
+		verbose_name = "integrante"
 		verbose_name_plural = "Integrantes"
 
 	def __str__(self):
@@ -37,8 +38,8 @@ class Investigador(ModeloBase):
 		return reverse('app:investigador-detalle', args=[str(self.id)])
 
 class Publicacion(ModeloBase):
-	fecha = models.DateField(help_text="Fecha de publicacion")
 	titulo = models.CharField(max_length=300, null=True, blank=True, help_text="Titulo de la Publicacion")
+	fecha = models.DateField(help_text="Fecha de publicacion")
 	copete = RichTextField(help_text="Copete", null=True, blank=True)
 	desarrollo = RichTextField(help_text="Contenido de la publicacion")
 	tipos=(
@@ -50,16 +51,15 @@ class Publicacion(ModeloBase):
 		('otr', 'Otro'),
 	)
 	categoria = models.CharField(max_length=3, choices=tipos, default='nn')
-	archivo = models.FileField(upload_to="publicaciones/files/", null=True, blank=True)
 	imagen = StdImageField(upload_to='publicaciones/img/',
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
 	video = models.FileField(upload_to="publicaciones/video/", null=True, blank=True)
-	autores = models.ManyToManyField(Investigador, related_name='autores_pub')
-	asociados = models.ManyToManyField(Investigador, null=True, blank=True, related_name='asociados_pub', limit_choices_to={'tipo': 'aso'})
+	integrantes = models.ManyToManyField(Investigador)
 	medios = models.CharField(max_length=100, null=True, blank=True)
 	link = models.URLField(max_length=200, null=True, blank=True, help_text="Link al medio")
 	es_novedad = models.BooleanField(default=False)
+
 	class Meta:
 		verbose_name_plural = "Publicaciones MESI"
 
@@ -70,19 +70,15 @@ class Publicacion(ModeloBase):
 		return reverse('app:publicacion-detalle', args=[str(self.id)])
 
 class Proyecto(ModeloBase):
+	titulo = models.CharField(max_length=300, help_text="Titulo del Proyecto")
 	fecha_inicio = models.DateField(help_text="Fecha de inicio")
 	fecha_final = models.DateField(help_text="Fecha de finalizacion", null=True, blank=True)
-	titulo = models.CharField(max_length=300, help_text="Titulo del Proyecto")
-	copete = RichTextField(help_text="Copete", null=True, blank=True)
 	desarrollo = RichTextField(help_text="Descripcion del proyecto")
 	terminado = models.BooleanField(default=False)
-	archivo = models.FileField(upload_to="proyectos/files/", null=True, blank=True)
-	autores = models.ManyToManyField(Investigador, related_name='autores_pro')
-	asociados = models.ManyToManyField(Investigador, null=True, blank=True, related_name='asociados_pro', limit_choices_to={'tipo': 'aso'})
+	integrantes = models.ManyToManyField(Investigador)
 
 	class Meta:
 		verbose_name_plural = "Proyectos"
-		db_table = 'proyectos'
 
 	def __str__(self):
 		return '{}'.format(self.titulo)
@@ -91,18 +87,20 @@ class Proyecto(ModeloBase):
 		return reverse('app:proyecto-detalle', args=[str(self.id)])
 
 class Actividad(ModeloBase):
+	titulo = models.CharField(max_length=300, help_text="Titulo del evento")
 	fecha_inicio = models.DateField(help_text="Fecha de inicio")
 	fecha_final = models.DateField(help_text="Fecha de finalizacion", null=True, blank=True)
 	hora_inicio = models.TimeField(help_text="Hora de inicio")
 	hora_final = models.TimeField(help_text="Hora de finalizacion", null=True, blank=True)
 	lugar = models.CharField(max_length=100, help_text="Lugar del evento")
 	desarrollo = RichTextField(help_text="Descripcion de la actividad")
+	integrantes = models.ManyToManyField(Investigador)
 
 	class Meta:
 		verbose_name_plural = "Actividades"
 
 	def __str__(self):
-		return '{}'.format(self.lugar)
+		return '{}'.format(self.titulo)
 
 	def get_absolute_url(self):
 		return reverse('app:actividad-detalle', args=[str(self.id)])
@@ -134,9 +132,7 @@ class Dato(ModeloBase):
 	imagen = StdImageField(upload_to='datos/img/', 
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
-	archivo = models.FileField(upload_to="datos/files/", null=True, blank=True)
-	autores = models.ManyToManyField(Investigador, related_name='autores_dato')
-	asociados = models.ManyToManyField(Investigador, null=True, blank=True, related_name='asociados_dato', limit_choices_to={'tipo': 'aso'})
+	integrantes = models.ManyToManyField(Investigador)
 
 	class Meta:
 		verbose_name_plural = "Datos y Estadisticas"
@@ -146,6 +142,21 @@ class Dato(ModeloBase):
 
 	def get_absolute_url(self):
 		return reverse('app:dato-detalle', args=[str(self.id)])
+
+class Archivo(ModeloBase):
+	publicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE, null=True, blank=True)
+	proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE, null=True, blank=True)
+	actividad = models.ForeignKey(Actividad, on_delete=models.CASCADE, null=True, blank=True)
+	novedad = models.ForeignKey(Novedad, on_delete=models.CASCADE, null=True, blank=True)
+	dato = models.ForeignKey(Dato, on_delete=models.CASCADE, null=True, blank=True)
+	descripcion = models.CharField(max_length=300, help_text="Titulo o nombre del archivo")
+	archivo = models.FileField(upload_to="uploads/files/")
+
+	class Meta:
+		verbose_name_plural = "Archivos"
+
+	def __str__(self):
+		return '{}'.format(self.id)
 
 class PublicacionIIEP(models.Model):
 	titulo_ingles = models.CharField(max_length=255, blank=True, null=True)
@@ -171,7 +182,6 @@ class PublicacionIIEP(models.Model):
 	id_viejo = models.IntegerField(blank=True, null=True)
 	institucion_id = models.IntegerField(blank=True, null=True)
 	numero = models.CharField(max_length=10, blank=True, null=True)
-	investigador = models.ManyToManyField(Investigador, db_table="investigadores_publicaciones")
 
 	class Meta:
 		verbose_name_plural = "Publicaciones IIEP"
@@ -198,7 +208,6 @@ class ProyectoIIEP(models.Model):
 	eliminado = models.IntegerField(blank=True, null=True)
 	director_id = models.IntegerField(blank=True, null=True)
 	palabras_clave = models.CharField(max_length=500, blank=True, null=True)
-	investigador = models.ManyToManyField(Investigador, db_table="investigadores_proyectos")
 
 	class Meta:
 		verbose_name_plural = "Proyectos IIEP"
@@ -232,7 +241,6 @@ class ActividadIIEP(models.Model):
 	orden = models.IntegerField(blank=True, null=True)
 	evento_tipo_id = models.PositiveIntegerField(blank=True, null=True)
 	fecha_hasta = models.IntegerField(blank=True, null=True)
-	investigador = models.ManyToManyField(Investigador, db_table="evento_investigador")
 
 	class Meta:
 		verbose_name_plural = "Actividades IIEP"
@@ -244,4 +252,3 @@ class ActividadIIEP(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('app:actividad-iiep-detalle', args=[str(self.id)])
-

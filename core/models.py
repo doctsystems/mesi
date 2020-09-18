@@ -15,7 +15,6 @@ class ModeloBase(models.Model):
 
 class SiteSettings(ModeloBase):
 	titulo = models.CharField(max_length=300, default="Titulo del sitio")
-	copete = RichTextField(help_text="Copete", default="Copete del sitio", null=True, blank=True)
 	desarrollo = RichTextField(help_text="Descripcion del sitio", default="Descripcion del sitio")
 
 	class Meta:

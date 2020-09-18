@@ -15,12 +15,8 @@
 	              <h1 style="margin-top: 0; padding-top:0;">MESI<br>
 	                <small>{{conf.titulo|truncatechars:"50"}}</small>      
 	              </h1>
-	           </div>
-	           {% if conf.copete %}
-					<p>{{conf.copete|striptags|safe|truncatechars:"200"}}</p>
-				{% else %}
-					<p>{{conf.desarrollo|striptags|safe|truncatechars:"200"}}</p>
-				{% endif %}
+	            </div>
+				<p>{{conf.desarrollo|safe|truncatechars:"200"}}</p>
 			{% endfor %}
            <div class="line-custom hr" >
                 <a href="{% url 'core:institucional' %}" class="pull-right">Seguir Leyendo<span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -37,8 +33,8 @@
 					<div class="atividad-name-home"><strong>
 						<span>{{actividad.lugar}} </span></strong><br>
 						<span aria-hidden="true">
-							{{actividad.desarrollo|striptags|safe|truncatechars:"100"}}
-						</span><br>             
+							{{actividad.desarrollo|safe|truncatechars:"100"}}
+						</span><br>
 					</div>
 				<hr>
 				</div>
@@ -57,21 +53,18 @@
 							<a href="{{ publicacion.imagen.url }}"><img alt="" src="{{ publicacion.imagen.thumbnail.url }}"/></a>
 			       			{% endif %}
 						</div>
-			          	<h5 class="card-title"> 
-			          		<!-- <a href="{{ publicacion.get_absolute_url }}">
-			             	{{publicacion.titulo}}
-			             	</a> -->
+			          	<h5 class="card-title">
 			             	{{publicacion.titulo}}
 			          	</h5>
 			          	<div class="date">
-			            	{% for autor in publicacion.autores.all %}
+			            	{% for autor in publicacion.integrantes.all %}
 			            		<span>{{autor}},</span>
 			            	{% endfor %}
 			          	</div>
 			          	{% if publicacion.copete %}
-							<p>{{publicacion.copete|striptags|safe|truncatechars:"200"}}</p>
+							<p>{{publicacion.copete|safe|truncatechars:"200"}}</p>
 						{% else %}
-							<p>{{publicacion.desarrollo|striptags|safe|truncatechars:"200"}}</p>
+							<p>{{publicacion.desarrollo|safe|truncatechars:"200"}}</p>
 						{% endif %}
 			          	<p> <a href="{{ publicacion.get_absolute_url }}">
 			          		<strong>Seguir Leyendo...</strong></a>

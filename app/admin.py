@@ -2,14 +2,12 @@ from django.contrib import admin
 from .models import *
 from django import forms
 from django.utils.safestring import mark_safe
+from django.template.defaultfilters import truncatechars
 
-# Register your models here.
 class InvestigadorAdmin(admin.ModelAdmin):
 	exclude = ['estado']
 	ordering = ('nombres', 'apellidos')
 	list_display = ('foto', 'nombres', 'apellidos', 'tipo', 'link')
-	# fields = ['nombres', 'apellidos', 'tipo_investigador', 'link']
-	# readonly_fields = ('created', 'updated')
 
 	def foto(self, obj):
 		if obj.avatar:
@@ -19,69 +17,93 @@ class InvestigadorAdmin(admin.ModelAdmin):
 	foto.short_description = 'Foto'
 	foto.allow_tags = True
 
+class ArchivoPublicacionInline(admin.StackedInline): #TabularInline
+	exclude = ['estado', 'actividad', 'proyecto', 'novedad', 'dato']
+	model = Archivo
+
 class PublicacionAdmin(admin.ModelAdmin):
 	exclude = ['estado']
-	filter_horizontal = ('autores', 'asociados', )
 	ordering = ('fecha', 'titulo')
-	list_display = ('titulo', 'fecha', 'pub_autores', )
-	search_fields = ('titulo','fecha','autores__nombres', 'autores__apellidos')
-	# date_hierarchy = 'fecha'
-	list_filter = ('fecha', 'autores__nombres','autores__apellidos')
+	list_display = ('titulo', 'fecha', 'pub_integrantes', )
+	search_fields = ('titulo','fecha','integrantes__nombres', 'integrantes__apellidos')
+	list_filter = ('fecha', 'integrantes__nombres','integrantes__apellidos')
+	filter_horizontal = ('integrantes', )
+	inlines = [ArchivoPublicacionInline]
 
-	def pub_autores(self, obj):
+	def pub_integrantes(self, obj):
 		return ", ".join(
-		[c.nombres for c in obj.autores.all().order_by("nombres")])
-	pub_autores.short_description = "Autores"
+		[c.nombres for c in obj.integrantes.all().order_by("nombres")])
+	pub_integrantes.short_description = "Integrantes"
+
+class ArchivoProyectoInline(admin.StackedInline):
+	exclude = ['estado', 'actividad', 'publicacion', 'novedad', 'dato']
+	model = Archivo
 
 class ProyectoAdmin(admin.ModelAdmin):
 	exclude = ['estado', 'terminado']
-	filter_horizontal = ('autores', 'asociados', )
 	ordering = ('fecha_inicio', 'titulo')
-	list_display = ('titulo', 'fecha_inicio', 'pub_autores', )
-	search_fields = ('titulo','fecha_inicio','autores__nombres', 'autores__apellidos')
-	list_filter = ('fecha_inicio', 'autores__nombres','autores__apellidos')
+	list_display = ('titulo', 'fecha_inicio', 'pub_integrantes', 'terminado')
+	search_fields = ('titulo','fecha_inicio','integrantes__nombres', 'integrantes__apellidos')
+	list_filter = ('fecha_inicio', 'integrantes__nombres','integrantes__apellidos')
+	filter_horizontal = ('integrantes', )
+	inlines = [ArchivoProyectoInline]
 
-	def pub_autores(self, obj):
+	def pub_integrantes(self, obj):
 		return ", ".join(
-		[c.nombres for c in obj.autores.all().order_by("nombres")])
-	pub_autores.short_description = "Autores"
+		[c.nombres for c in obj.integrantes.all().order_by("nombres")])
+	pub_integrantes.short_description = "Autores"
+
+	def save_model(self, request, obj, form, change):
+		if request.POST['fecha_final']:
+			print('Terminado...')
+			obj.terminado=True
+		else:
+			print('No terminado...')
+			obj.terminado=False
+		return super(ProyectoAdmin, self).save_model(request, obj, form, change)
+
+class ArchivoActividadInline(admin.StackedInline):
+	exclude = ['estado', 'publicacion', 'proyecto', 'novedad', 'dato']
+	model = Archivo
 
 class ActividadAdmin(admin.ModelAdmin):
 	exclude = ['estado']
-	list_display = ('fecha_inicio', 'hora_inicio', 'lugar', 'descripcion', )
+	filter_horizontal = ('integrantes', )
+	list_display = ('titulo', 'fecha_inicio', 'hora_inicio', 'lugar', )
+	inlines = [ArchivoActividadInline]
 
-	def descripcion(self, obj):
-		return mark_safe('%s' % obj.desarrollo)
-	descripcion.short_description = 'Descripcion'
-	descripcion.allow_tags = True
+class ArchivoNovedadInline(admin.StackedInline):
+	exclude = ['estado', 'publicacion', 'proyecto', 'actividad', 'dato']
+	model = Archivo
 
 class NovedadAdmin(admin.ModelAdmin):
 	exclude = ['estado']
 	ordering = ('fecha', 'titulo')
-	list_display = ('titulo', 'fecha',  'link', 'descripcion',)
+	list_display = ('titulo', 'fecha',  'link', )
+	inlines = [ArchivoNovedadInline]
 
 	def descripcion(self, obj):
 		return mark_safe('%s' % obj.copete)
 	descripcion.short_description = 'Descripcion'
 	descripcion.allow_tags = True
 
+class ArchivoDatoInline(admin.StackedInline):
+	exclude = ['estado', 'publicacion', 'proyecto', 'actividad', 'novedad']
+	model = Archivo
+
 class DatoAdmin(admin.ModelAdmin):
 	exclude = ['estado', ]
-	filter_horizontal = ('autores', 'asociados', )
+	filter_horizontal = ('integrantes', )
 	ordering = ('fecha', 'titulo')
-	list_display = ('titulo', 'fecha', 'dato_autores', 'descripcion' )
-	search_fields = ('titulo','fecha','autores__nombres', 'autores__apellidos')
-	list_filter = ('fecha', 'autores__nombres','autores__apellidos')
+	list_display = ('titulo', 'fecha', 'dato_integrantes', )
+	search_fields = ('titulo','fecha','integrantes__nombres', 'integrantes__apellidos')
+	list_filter = ('fecha', 'integrantes__nombres','integrantes__apellidos')
+	inlines = [ArchivoDatoInline]
 
-	def dato_autores(self, obj):
+	def dato_integrantes(self, obj):
 		return ", ".join(
-		[c.nombres for c in obj.autores.all().order_by("nombres")])
-	dato_autores.short_description = "Autores"
-
-	def descripcion(self, obj):
-		return mark_safe('%s' % obj.desarrollo)
-	descripcion.short_description = 'Descripcion'
-	descripcion.allow_tags = True
+		[c.nombres for c in obj.integrantes.all().order_by("nombres")])
+	dato_integrantes.short_description = "Integrantes"
 
 admin.site.register(Investigador, InvestigadorAdmin)
 admin.site.register(Publicacion, PublicacionAdmin)
