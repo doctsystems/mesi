@@ -23,7 +23,7 @@ class Investigador(ModeloBase):
 	link = models.URLField(max_length = 200, help_text="Link al perfil privado")
 
 	class Meta:
-		verbose_name_plural = "Investigadores"
+		verbose_name_plural = "Integrantes"
 
 	def __str__(self):
 		return '{} {}'.format(self.nombres, self.apellidos)
