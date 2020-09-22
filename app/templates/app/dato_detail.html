@@ -20,24 +20,18 @@
 		</div>
 		<div class="col-md-8 fecha-dato">
 			<p><strong>Autores: </strong>
-				{% for autor in dato.autores.all %}
+				{% for autor in dato.integrantes.all %}
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
 			<p><strong>Copete: </strong>{{ dato.copete|safe }}</p>
 			<p><strong>Desarrollo: </strong>{{ dato.desarrollo|safe }}</p>
-			<p><strong>Inv. asociados: </strong>
-				{% for asociado in dato.asociados.all %}
-					<span>{{ asociado }},</span>
-				{% endfor %}
-			</p>
 			<p><strong>Archivos: </strong>
-				{% if dato.archivo %}
-					<a target="_blank" class="btn btn-default" role="button" 
-						href="{{ dato.archivo.url }}">
+				{% for file in dato.archivo_set.all %}
+					<a target="_blank" class="btn btn-default" role="button" href="{{ file.archivo.url }}">
 						<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
 					</a>
-				{% endif %}
+				{% endfor %}
 			</p>
 		</div>
 	</div>

@@ -17,9 +17,11 @@
 	<div class="col-12" >
 		<div class="col-md-4">
 			<div class="image-content-detail">
-			{% if novedad.imagen %}
-				<a href="{{ novedad.imagen.url }}"><img alt="" src="{{ novedad.imagen.url }}" class="card-img-top img-thumbnail"/></a>
-			{% endif %}
+				{% if publicacion.imagen %}
+					<a href="{{ publicacion.imagen.url }}"><img alt="" src="{{ publicacion.imagen.url }}" class="card-img-top img-thumbnail"/></a>
+				{% else %}
+					<img src="/media/publicaciones/img/nn.png" alt="" class="card-img-top img-thumbnail">
+				{% endif %}
 			</div>
 		</div>
 		<div class="col-md-8 fecha-publicacion">

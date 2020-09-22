@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 class InvestigadoresView(ListView):
 	model=Investigador
 	template_name="app/investigadores_list.html"
-	paginate_by = 9
+	paginate_by = 24
 
 class InvestigadorDetalleView(DetailView):
 	model = Investigador
@@ -15,7 +15,7 @@ class InvestigadorDetalleView(DetailView):
 class PublicacionesView(ListView):
 	model=Publicacion
 	template_name="app/publicaciones_list.html"
-	paginate_by = 9
+	paginate_by = 24
 
 def PublicacionesView(request, cat='nn'):
 	if cat=='nn':
@@ -31,7 +31,7 @@ class PublicacionDetalleView(DetailView):
 class ProyectosView(ListView):
 	model=Proyecto
 	template_name="app/proyectos_list.html"
-	paginate_by = 9
+	paginate_by = 24
 
 class ProyectoDetalleView(DetailView):
 	model = Proyecto
@@ -39,7 +39,7 @@ class ProyectoDetalleView(DetailView):
 class ActividadesView(ListView):
 	model=Actividad
 	template_name="app/actividades_list.html"
-	paginate_by = 9
+	paginate_by = 24
 
 class ActividadDetalleView(DetailView):
 	model = Actividad
@@ -47,7 +47,7 @@ class ActividadDetalleView(DetailView):
 class NovedadesView(ListView):
 	model=Novedad
 	template_name="app/novedades_list.html"
-	paginate_by = 9
+	paginate_by = 24
 
 	def get_context_data(self, **kwargs):
 		context = super(NovedadesView, self).get_context_data(**kwargs)
@@ -67,7 +67,7 @@ class NovedadDetalleView(DetailView):
 class DatosView(ListView):
 	model=Dato
 	template_name="app/datos_list.html"
-	paginate_by = 10
+	paginate_by = 24
 
 class DatoDetalleView(DetailView):
 	model = Dato

@@ -23,14 +23,14 @@
 							</a>
 						</h5>
 						<div class="date">
-							{% for autor in proyecto.autores.all %}
+							{% for autor in proyecto.integrantes.all %}
 								<span>{{ autor }},</span>
 							{% endfor %}
 						</div>
 						{% if proyecto.copete %}
-							<p>{{proyecto.copete|striptags|safe|truncatechars:"200"}}</p>
+							<p>{{proyecto.copete|safe|truncatechars:"200"}}</p>
 						{% else %}
-							<p>{{proyecto.desarrollo|striptags|safe|truncatechars:"200"}}</p>
+							<p>{{proyecto.desarrollo|safe|truncatechars:"200"}}</p>
 						{% endif %}
 						<p><a href="{{ proyecto.get_absolute_url }}">
 							<strong>Continuar leyendo...</strong> 

@@ -26,24 +26,18 @@
 		</div>
 		<div class="col-md-8 fecha-proyecto">
 			<p><strong>Autores: </strong>
-				{% for autor in proyecto.autores.all %}
+				{% for autor in proyecto.integrantes.all %}
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
 			<p><strong>Copete: </strong>{{ proyecto.copete|safe }}</p>
 			<p><strong>Desarrollo: </strong>{{ proyecto.desarrollo|safe }}</p>
-			<p><strong>Inv. asociados: </strong>
-				{% for asociado in proyecto.asociados.all %}
-					<span>{{ asociado }},</span>
-				{% endfor %}
-			</p>
 			<p><strong>Archivos: </strong>
-				{% if proyecto.archivo %}
-					<a target="_blank" class="btn btn-default" role="button" 
-						href="{{ proyecto.archivo.url }}">
+				{% for file in proyecto.archivo_set.all %}
+					<a target="_blank" class="btn btn-default" role="button" href="{{ file.archivo.url }}">
 						<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
 					</a>
-				{% endif %}
+				{% endfor %}
 			</p>
 		</div>
 	</div>

@@ -17,7 +17,11 @@
 			{% for publicacion in publicaciones %}
 				<div class="card col-md-3 publicaciones">
 					<div class="image-content">
-						<img alt="" src="{{ publicacion.imagen.thumbnail.url }}" class="card-img-top img-thumbnail"/>
+						{% if publicacion.imagen %}
+							<a href="{{ publicacion.imagen.url }}"><img alt="" src="{{ publicacion.imagen.url }}" class="card-img-top img-thumbnail"/></a>
+						{% else %}
+							<img src="/media/publicaciones/img/nn.png" alt="" class="card-img-top img-thumbnail">
+						{% endif %}
 					</div>
 					<div class="card-body">
 						<h3 class="card-title">
@@ -29,14 +33,14 @@
 							Categoria: {{ publicacion.categoria }}
 						</h5>
 						<div class="date">
-							{% for autor in publicacion.autores.all %}
+							{% for autor in publicacion.integrantes.all %}
 								<span>{{ autor }},</span>
 							{% endfor %}
 						</div>
 						{% if publicacion.copete %}
-							<p>{{publicacion.copete|striptags|safe|truncatechars:"200"}}</p>
+							<p>{{publicacion.copete|safe|truncatechars:"200"}}</p>
 						{% else %}
-							<p>{{publicacion.desarrollo|striptags|safe|truncatechars:"200"}}</p>
+							<p>{{publicacion.desarrollo|safe|truncatechars:"200"}}</p>
 						{% endif %}
 						<p><a href="{{ publicacion.get_absolute_url }}">
 							<strong>Continuar leyendo...</strong> 

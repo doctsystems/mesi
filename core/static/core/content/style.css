@@ -2,7 +2,7 @@
 
 a {
     /*color: #000000;*/
-    color: #428bca;
+    color:darkred!important;
 }
 .foter {
     color: #fff;
@@ -39,6 +39,7 @@ a {
 
 .navbar-nav > li > a {
     padding-left: 25px;
+    
 }
 
 .navbar-default .navbar-brand {
@@ -423,7 +424,10 @@ a {
     text-align: start;
 }
 .footer {
-    background: #002a4c !important;
-    color: #fff !important;
+    background: #fff !important;
+    border-top: 1px solid black;
+    color: #181818 !important;
     padding: 15px !important;
+
+   
 }
