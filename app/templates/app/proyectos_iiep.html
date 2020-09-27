@@ -12,24 +12,31 @@
 <hr>
 
 <div class="page-content row">
-	<div class="col-md-12">
-        {% if proyectos %}
-		{% for proyecto in proyectos %}
+<div class="col-md-12">
+{% if proyectos %}
+{% for proyecto in proyectos %}
+<div class="card col-md-3 proyectos">
+  <div class="card-body">
+    <h5 class="card-title">
+      <a href="{{ proyecto.get_absolute_url }}">
+        {{ proyecto.titulo_espanol }}
+      </a>
+    </h5>
+    {% if proyecto.descripcion_espanol %}
+      <p>{{proyecto.descripcion_espanol|safe|truncatechars:"200"}}</p>
+    {% else %}
+      <p></p>
+    {% endif %}
+    <p><a href="{{ proyecto.get_absolute_url }}">
+      <strong>Continuar leyendo...</strong> 
+      </a>
+    </p>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
 
-        	<div class="col-md-12">
-				<h4><a href="{{ proyecto.get_absolute_url }}">{{proyecto.titulo_espanol}} </a></h4>
-				<h5 >{{proyecto.last_update_date}}</h5>	
-		
-				<p class="project-description">{{proyecto.descripcion_espanol|safe|truncatechars:200}}
-					<br>
-					--------------------------
-				</p>
-				<p style="display: none;"> <span><a href="{{ proyecto.get_absolute_url }}">Leer más...</a></span></p>
-			</div>
-		{% endfor %}
-        {% endif %}
-
-    </div>
+</div>
 
 
 	<div class="col-sm-12">

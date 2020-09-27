@@ -13,11 +13,11 @@ class Investigador(ModeloBase):
 		null=True, blank=True)
 	tipos=(
 		('nn', '----------'),
-		('inv', 'Investigador'),
-		('aso', 'Asociado'),
-		('bec', 'Becario'),
+		('inv', 'Investigador/a'),
+		('aso', 'Asociado/a'),
+		('bec', 'Becario/a'),
 		('aux', 'Auxiliar'),
-		('otr', 'Otro'),
+		('otr', 'Otro/a'),
 	)
 	tipo = models.CharField(max_length=3, choices=tipos, default='nn')
 	link = models.URLField(max_length = 200, help_text="Link al perfil privado")
