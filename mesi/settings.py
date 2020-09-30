@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'app',
+    'pde',
     'django_userforeignkey',
     'ckeditor',
 ]

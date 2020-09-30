@@ -12,30 +12,33 @@
 <hr>
 
 <div class="page-content row">
-<div class="col-md-12">
-{% if proyectos %}
-{% for proyecto in proyectos %}
-<div class="card col-md-3 proyectos">
-  <div class="card-body">
-    <h5 class="card-title">
-      <a href="{{ proyecto.get_absolute_url }}">
-        {{ proyecto.titulo_espanol }}
-      </a>
-    </h5>
-    {% if proyecto.descripcion_espanol %}
-      <p>{{proyecto.descripcion_espanol|safe|truncatechars:"200"}}</p>
-    {% else %}
-      <p></p>
-    {% endif %}
-    <p><a href="{{ proyecto.get_absolute_url }}">
-      <strong>Continuar leyendo...</strong> 
-      </a>
-    </p>
-  </div>
-</div>
-{% endfor %}
-{% endif %}
 
+<div class="page-content">
+<div class="container">
+  <div class="row">
+    {% if proyectos %}
+      {% for proyecto in proyectos %}
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-body h-100">
+            <h4>
+              <a href="{{ proyecto.get_absolute_url }}">
+                {{ proyecto.titulo_espanol|title|truncatechars:100}}
+              </a>
+            </h4>
+            <p>{{proyecto.descripcion_espanol|lower|truncatechars:200}}</p>
+            </div>
+            <div class="card-footer">
+              <a class="card-link" href="{{ proyecto.get_absolute_url }}" role="button">
+                Seguir leyendo...
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <hr>
 </div>
 
 

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} MESI - Matrices {% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li><a href="{% url 'pde:in' %}">Modelos</a></li>
+	<li class="active">Formulario de resultados</li>
+</ol>
+
+<h1>Formulario de resultados</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-12" >
+		<div class="col-md-8 fecha-dato">
+			<p>
+				<strong>Archivo MIP_BAC_FLQ </strong>
+				<a target="_blank" class="btn btn-default" role="button" href="/media/downloads/files/out/MIP_BAC_FLQ.xlsx">
+					<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
+				</a>
+			</p>
+			<p>
+				<strong>Archivo MIP_ROC_FLQ </strong>
+				<a target="_blank" class="btn btn-default" role="button" href="/media/downloads/files/out/MIP_ROC_FLQ.xlsx">
+					<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
+				</a>
+			</p>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

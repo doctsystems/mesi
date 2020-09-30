@@ -3,9 +3,14 @@ import sys
 import pandas as pd
 import numpy as np
 import datetime
-from functions import _calc_SLQ, _calc_FLQ, _calc_AFLQ, _coef_tecnicos
-from reading_functions import lecturaMIP, lecturaVBP, lecturaGRP
-from grouping_functions import agruparMatrices, zipMatrices
+from pde.functions import _calc_SLQ, _calc_FLQ, _calc_AFLQ, _coef_tecnicos
+from pde.reading_functions import lecturaMIP, lecturaVBP, lecturaGRP
+from pde.grouping_functions import agruparMatrices, zipMatrices
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# print(BASE_DIR, '****************************************')
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# print(BASE_DIR, '****************************************')
 
 def calc_SLQ(vbp_global, vbp_local):
     slq = _calc_SLQ(vbp_global,vbp_local)
@@ -39,22 +44,36 @@ def calc_MIP_local(mip_global, vbp_global, vbp_local, metodo):
             mip[i][j] = matParams[i][j] * coef[i][j]
     return mip, coef, slq, matParams
 
-def main():
+
+def main(id, urlNational, urlRegional, urlSector):
     metodo = 'FLQ'
-    if len(sys.argv) > 1:
-        file_mip = sys.argv[1]
-        file_vbps = sys.argv[2]
-        file_grp = sys.argv[3]
-        if len(sys.argv) > 4:
-            metodo = sys.argv[4]
-    else:
-        file_mip = os.path.join('in','sg_MIP_Arg.csv')
-        file_vbps = os.path.join('in','sg_VBPs.csv')
-        file_grp = os.path.join('in','sg_GRP.csv')
+    # if len(sys.argv) > 1:
+    #     file_mip = sys.argv[1]
+    #     file_vbps = sys.argv[2]
+    #     file_grp = sys.argv[3]
+    #     if len(sys.argv) > 4:
+    #         metodo = sys.argv[4]
+    # else:
+    #     file_mip = os.path.join('in','sg_MIP_Arg.csv')
+    #     file_vbps = os.path.join('in','sg_VBPs.csv')
+    #     file_grp = os.path.join('in','sg_GRP.csv')
         # descomentar para probar con agregacion de sectores
         #file_vbps = os.path.join('in','sg_VBPs_wAgr.csv') 
-        #file_grp = os.path.join('in','sg_GRP_wAgr.csv')        
-        
+        #file_grp = os.path.join('in','sg_GRP_wAgr.csv')
+
+    # Para Windows
+    file_mip = BASE_DIR + urlNational.replace("/", "\\")
+    print(file_mip, '  *************************')
+    file_vbps = BASE_DIR + urlRegional.replace("/", "\\")
+    print(file_vbps, '  *************************')
+    file_grp = BASE_DIR + urlSector.replace("/", "\\")
+    print(file_grp, '  *************************')
+
+    # Para Linux
+    # file_mip = os.path.join(BASE_DIR, urlNational)
+    # file_vbps = os.path.join(BASE_DIR, urlRegional)
+    # file_grp = os.path.join(BASE_DIR, urlSector)
+
     lookup_mip, lookup_vbp, lookup_zip = lecturaGRP(file_grp, flagzip=True)
     mip_global = lecturaMIP(file_mip, lookup_mip)
     sc_vbp, vbp_global, vbp_locales, vbp_reg = lecturaVBP(file_vbps, lookup_vbp)
@@ -64,9 +83,11 @@ def main():
     sc_vbp_out, out_mip_global, out_vbp_global, out_vbp_locales = zipMatrices(
             out_mip_global, out_vbp_global, out_vbp_locales, sc_vbp_out, lookup_vbp, lookup_zip)
 
-        	
     t = datetime.datetime.now()
-    folderout = 'out-%d-%d-%d.%d' % (t.hour,t.minute,t.second,t.microsecond)
+    # folderout = 'out-%d-%d-%d.%d' % (t.hour,t.minute,t.second,t.microsecond)
+    # ruta=BASE_DIR + '\\outs\\%s' % id
+    # folderout = BASE_DIR + '\\outs\\%s' % id
+    folderout = BASE_DIR + '\\media\\downloads\\files\\out'
     if os.path.exists(folderout) == False:
         os.mkdir(folderout)
 
@@ -99,7 +120,6 @@ def main():
             df_coef.to_excel(writer, index=False, sheet_name='Coefficients')
             df_slq.to_excel(writer, index=False, sheet_name='SLQ')
             writer.save()
-            
 
 if __name__ == "__main__":
     main()

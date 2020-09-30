@@ -5,6 +5,7 @@ urlpatterns = [
 	path('admin/', admin.site.urls, name='admin'),
 	path('', include(('core.urls', 'core'), namespace='core')),
 	path('app/', include(('app.urls', 'app'), namespace='app')),
+	path('pde/', include(('pde.urls', 'pde'), namespace='pde')),
 ]
 
 from django.conf import settings
