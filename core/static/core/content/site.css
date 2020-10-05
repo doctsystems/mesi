@@ -17,8 +17,8 @@
 
 .pagination.example>.active>a, .pagination.example>.active>span, .pagination.example>.active>a:hover, .pagination.example>.active>span:hover, .pagination.example>.active>a:focus, .pagination.example>.active>span:focus, .btn-primary
 {
-    background-color: #9b282a!important;
-    border-color: #c43233!important;
+    background-color:green;
+    border-color: green;
    
 }
 
@@ -30,7 +30,7 @@
 }
 
 a {
-    color:#9b282a!important;
+    color:green!important;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -41,8 +41,8 @@ a {
     border-radius:0 !important;
 }
 .navbar-inverse {
-    background-color: #9b282a!important;
-    border-color: #c43233!important;
+    background-color:green;
+    border-color: green;
     color: #cecece;
 }
 .navbar-inverse .navbar-nav > li > a {

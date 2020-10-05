@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} MESI - Investigadores {% endblock %}
+{% block title %} MESI - Integrantes {% endblock %}
 
 {% block content %}
 <ol class="breadcrumb">
 	<li><a href="{% url 'core:home' %}">Inicio</a></li>
-	<li class="active">Investigadores</li>
+	<li class="active">Integrantes</li>
 </ol>
 
 <div class="row integrantes">
-	<h2>Investigadores de MESI</h2>
+	<h2>Integrantes de MESI</h2>
 	<hr>
 	{% if investigador_list %}
 		{% for investigador in investigador_list %}
