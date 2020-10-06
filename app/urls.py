@@ -34,6 +34,7 @@ urlpatterns+=[
 ]
 
 urlpatterns+=[
-	path('datos/', DatosView.as_view(), name='datos-list'),
+	# path('datos/', DatosView.as_view(), name='datos-list'),
+	path('datos/<str:cat>', DatosView, name='datos-list'),
 	path('dato/<int:pk>', DatoDetalleView.as_view(), name="dato-detalle"),
 ]

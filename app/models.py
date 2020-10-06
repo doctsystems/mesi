@@ -5,12 +5,6 @@ from django.urls import reverse
 from ckeditor.fields import RichTextField
 
 class Investigador(ModeloBase):
-	nombres = models.CharField(max_length=50)
-	apellidos = models.CharField(max_length=50)
-	perfil = models.CharField(max_length=100)
-	avatar = StdImageField(upload_to='investigadores/img/avatar/',
-		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
-		null=True, blank=True)
 	tipos=(
 		('nn', '----------'),
 		('inv', 'Investigador/a'),
@@ -20,6 +14,12 @@ class Investigador(ModeloBase):
 		('otr', 'Otro/a'),
 	)
 	tipo = models.CharField(max_length=3, choices=tipos, default='nn')
+	nombres = models.CharField(max_length=50)
+	apellidos = models.CharField(max_length=50)
+	perfil = models.CharField(max_length=100)
+	avatar = StdImageField(upload_to='investigadores/img/avatar/',
+		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
+		null=True, blank=True)
 	link = models.URLField(max_length = 200, help_text="Link al perfil privado")
 
 	class Meta:
@@ -38,10 +38,6 @@ class Investigador(ModeloBase):
 		return reverse('app:investigador-detalle', args=[str(self.id)])
 
 class Publicacion(ModeloBase):
-	titulo = models.CharField(max_length=300, null=True, blank=True, help_text="Titulo de la Publicacion")
-	fecha = models.DateField(help_text="Fecha de publicacion")
-	copete = RichTextField(help_text="Copete", null=True, blank=True)
-	desarrollo = RichTextField(help_text="Contenido de la publicacion")
 	tipos=(
 		('nn', '----------'),
 		('not', 'Notas'),
@@ -51,6 +47,10 @@ class Publicacion(ModeloBase):
 		('otr', 'Otro'),
 	)
 	categoria = models.CharField(max_length=3, choices=tipos, default='nn')
+	titulo = models.CharField(max_length=300, null=True, blank=True, help_text="Titulo de la Publicacion")
+	fecha = models.DateField(help_text="Fecha de publicacion")
+	copete = RichTextField(help_text="Copete", null=True, blank=True)
+	desarrollo = RichTextField(help_text="Contenido de la publicacion")
 	imagen = StdImageField(upload_to='publicaciones/img/',
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
@@ -125,6 +125,15 @@ class Novedad(ModeloBase):
 		return reverse('app:novedad-detalle', args=[str(self.id)])
 
 class Dato(ModeloBase):
+	tipos=(
+		('nn', '----------'),
+		('ene', 'Energia y ambiente'),
+		('sec', 'Datos sectoriales'),
+		('mat', 'Datos matriciales'),
+		('com', 'Comercio'),
+		# ('otr', 'Otro'),
+	)
+	categoria = models.CharField(max_length=3, choices=tipos, default='nn')
 	fecha = models.DateField(help_text="Fecha...")
 	titulo = models.CharField(max_length=300, help_text="Titulo...")
 	copete = RichTextField(help_text="Copete", null=True, blank=True)

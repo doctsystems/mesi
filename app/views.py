@@ -69,6 +69,14 @@ class DatosView(ListView):
 	template_name="app/datos_list.html"
 	paginate_by = 24
 
+def DatosView(request, cat='nn'):
+	if cat=='nn':
+		datos = Dato.objects.all()
+	else:
+		datos = Dato.objects.filter(categoria=cat)
+	contexto = {'datos': datos}
+	return render (request, 'app/datos_list.html', contexto)
+
 class DatoDetalleView(DetailView):
 	model = Dato
 

@@ -55,13 +55,13 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Datos</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'app:datos-list' %}">Energía y ambiente</a>
+              <a class="dropdown-item" href="{% url 'app:datos-list' 'ene' %}">Energía y ambiente</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="">Datos Sectoriales</a>
+              <a class="dropdown-item" href="{% url 'app:datos-list' 'sec' %}">Datos Sectoriales</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="">Datos Matriciales </a>
+              <a class="dropdown-item" href="{% url 'app:datos-list' 'mat' %}">Datos Matriciales </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="">Comercio</a>
+              <a class="dropdown-item" href="{% url 'app:datos-list' 'com' %}">Comercio</a>
             </div>                                        
           </li>
           <li><a href="{% url 'pde:in' %}">Modelos</a></li>
