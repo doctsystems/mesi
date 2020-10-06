@@ -16,14 +16,14 @@
 		{% for investigador in investigador_list %}
 			<div class="col-md-4 integrante" style="max-width:32%;">
 				<a href="{{ investigador.get_absolute_url }}">
-					<div class="img-integrante col-md-4">
+					<div class="img-integrante col-md-6">
 						{% if investigador.avatar %}
 						<img src="{{ investigador.avatar.url }}" alt="Avatar" style="border-radius: 50%;">
 						{% else %}
 						<img src="/media/investigadores/img/avatar/nn.png" alt="Avatar">
 						{% endif %}
 					</div>
-					<div class="info-integrante col-md-8">
+					<div class="info-integrante col-md-6">
 						<h4>{{ investigador }}</h4>              
 						<p>{{ investigador.perfil }}</p>
 						<p>{{ investigador.get_tipo_display }}</p>
