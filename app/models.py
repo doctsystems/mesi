@@ -20,6 +20,7 @@ class Investigador(ModeloBase):
 	avatar = StdImageField(upload_to='investigadores/img/avatar/',
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
+	email = models.EmailField(max_length=254, default="email@example.com")
 	link = models.URLField(max_length = 200, help_text="Link al perfil privado")
 
 	class Meta:

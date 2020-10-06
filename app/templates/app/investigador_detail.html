@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block css_extra %}
+<style type="text/css">
+	body { 
+		padding-top:30px;
+	}
+	.glyphicon {
+		margin-bottom: 10px;margin-right: 10px;
+	}
+	small {
+		display: block;
+		line-height: 1.428571429;
+		color: #999;
+	}
+</style>
+{% endblock %}
+
 {% block title %} MESI - Detalles {% endblock %}
 
 {% block content %}
@@ -10,7 +26,7 @@
 	<li class="active">{{ investigador }}</li>
 </ol>
 
-<h1>{{ investigador }}</h1>
+<!-- <h1>{{ investigador }}</h1>
 <hr>
 
 <div class="page-content row">
@@ -24,9 +40,61 @@
 		</div>
 		<div class="col-md-8 fecha-publicacion">
 			<p><strong>Perfil: </strong>{{ investigador.perfil }}</p>
-			<p><strong>Tipo: </strong>{{ investigador.tipo_investigador }}</p>
-			<p><strong>Link: </strong>{{ investigador.link }}</p>
+			<p><strong>Tipo: </strong>{{ investigador.get_tipo_display }}</p>
+			<p><strong>Link: </strong>
+				<a href="{{ investigador.link }}" target="_blank">{{ investigador.link }}</a>
+			</p>
 		</div>
 	</div>
+</div> -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        {% if investigador.avatar %}
+							<img src="{{ investigador.avatar.url }}" alt="Avatar" style="width: 50%; border-radius: 50%;">
+						{% else %}
+							<img src="/media/investigadores/img/avatar/male.png" alt="Avatar" style="width: 50%;">
+						{% endif %}
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>{{ investigador }}</h4>
+                        <small>
+                        	<cite title="Buenos Aires, ARG">Buenos Aires, ARG 
+                        		<i class="glyphicon glyphicon-map-marker"></i>
+                        	</cite>
+                        </small>
+                        <p>
+                        	<i class="glyphicon glyphicon-info-sign"></i>{{investigador.get_tipo_display}}
+                            <br />
+                            <i class="glyphicon glyphicon-envelope"></i>{{investigador.email}}
+                            <br />
+                            <i class="glyphicon glyphicon-globe"></i>
+                            <a href="{{ investigador.link }}">{{investigador.link}}</a>
+                            <br />
+                            <!-- <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p> -->
+                        <!-- Split button -->
+                        <!-- <div class="btn-group">
+                            <button type="button" class="btn btn-primary">
+                                Social</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span><span class="sr-only">Social</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Github</a></li>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
