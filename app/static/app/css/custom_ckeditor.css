@@ -1,4 +1,4 @@
-.django-ckeditor-widget, .cke_editor_id_desarrollo, .cke_editor_id_copete {
+.django-ckeditor-widget, .cke_editor_id_desarrollo, .cke_editor_id_copete, .cke_editor_id_biografia {
     width: 100% !important;
     max-width: 800px !important;
     resize: none;

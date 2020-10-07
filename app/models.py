@@ -17,10 +17,13 @@ class Investigador(ModeloBase):
 	nombres = models.CharField(max_length=50)
 	apellidos = models.CharField(max_length=50)
 	perfil = models.CharField(max_length=100)
+	biografia = RichTextField(help_text="Biografia")
 	avatar = StdImageField(upload_to='investigadores/img/avatar/',
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
 	email = models.EmailField(max_length=254, default="email@example.com")
+	curriculum = models.FileField(upload_to="investigadores/cv/")
+	orcid = models.CharField(max_length=30, help_text="Numero ORCID (xxxx-xxxx-xxxx-xxxx)")
 	link = models.URLField(max_length = 200, help_text="Link al perfil privado")
 
 	class Meta:
