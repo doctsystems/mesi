@@ -45,17 +45,23 @@
             <p>
             	<i class="glyphicon glyphicon-info-sign"></i>{{investigador.get_tipo_display}}<br/>
                 <i class="glyphicon glyphicon-envelope"></i>{{investigador.email}}<br/>
-                <i class="glyphicon glyphicon-globe"></i>
-                <a href="{{ investigador.link }}" target="_blank">{{investigador.link}}</a><br/>
-                <i class="glyphicon glyphicon-cloud"></i>
-                <a href=" https://orcid.org/{{ investigador.orcid }}" target="_blank">
-                    Visita mi pagina de Orcid
-                </a><br/>
+                {% if investigador.link %}
+                    <i class="glyphicon glyphicon-globe"></i>
+                    <a href="{{ investigador.link }}" target="_blank">{{investigador.link}}</a><br/>
+                {% endif %}
+                {% if investigador.orcid %}
+                    <i class="glyphicon glyphicon-cloud"></i>
+                    <a href="https://orcid.org/{{ investigador.orcid }}" target="_blank">
+                        Visita mi pagina de Orcid
+                    </a><br>
+                {% endif %}
                 {% if investigador.curriculum %}
                     <i class="glyphicon glyphicon-file"></i>
                     <a href="{{ investigador.curriculum.url }}" target="_blank">Mi curriculum</a><br/>
                 {% endif %}
             </p>
+            <h4>Perfil</h4>
+            <p>{{investigador.perfil|safe}}</p>
             <h4>Biografia</h4>
             <p>{{investigador.biografia|safe}}</p>
         </div>
