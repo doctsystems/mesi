@@ -44,7 +44,7 @@
 					{% endif %}
 				</p>
 			{% endif %}
-			{% if publicacion.archivo %}
+			{% if publicacion.archivo_set %}
 				<p><strong>Archivos: </strong>
 					{% for file in publicacion.archivo_set.all %}
 						<a target="_blank" class="btn btn-default" role="button" href="{{ file.archivo.url }}">
