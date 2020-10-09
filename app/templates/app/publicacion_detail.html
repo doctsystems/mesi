@@ -31,22 +31,36 @@
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
-			<p><strong>Copete: </strong>{{ publicacion.copete|safe }}</p>
+			{% if publicacion.copete %}
+				<p><strong>Copete: </strong>{{ publicacion.copete|safe }}</p>
+			{% endif %}
 			<p><strong>Desarrollo: </strong>{{ publicacion.desarrollo|safe }}</p>
-			<p><strong>Video: </strong>
-				{% if publicacion.video %}
-					<video name='video' controls autoplay width='50%' height='40%'>
-						<source src="{{ publicacion.video.url }}" type="video/mp4"></source>
-					</video>
-				{% endif %}
-			</p>
-			<p><strong>Archivos: </strong>
-				{% for file in publicacion.archivo_set.all %}
-					<a target="_blank" class="btn btn-default" role="button" href="{{ file.archivo.url }}">
-						<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
-					</a>
-				{% endfor %}
-			</p>
+			{% if publicacion.video %}
+				<p><strong>Video: </strong>
+					{% if publicacion.video %}
+						<video name='video' controls autoplay width='50%' height='40%'>
+							<source src="{{ publicacion.video.url }}" type="video/mp4"></source>
+						</video>
+					{% endif %}
+				</p>
+			{% endif %}
+			{% if publicacion.archivo %}
+				<p><strong>Archivos: </strong>
+					{% for file in publicacion.archivo_set.all %}
+						<a target="_blank" class="btn btn-default" role="button" href="{{ file.archivo.url }}">
+							<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
+						</a>
+					{% endfor %}
+				</p>
+			{% endif %}
+			{% if publicacion.video %}
+				<p><strong>Medios: {{ publicacion.medios }}</strong></p>
+			{% endif %}
+			{% if publicacion.link %}
+				<p><strong>Link: </strong>
+					<a target="_blank" href="{{publicacion.link}}">{{publicacion.link}}</a>
+				</p>
+			{% endif %}
 		</div>
 	</div>
 </div>
