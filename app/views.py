@@ -14,7 +14,7 @@ class InvestigadorDetalleView(DetailView):
 
 class PublicacionesView(ListView):
 	model=Publicacion
-	template_name="app/publicacion_detail.html"
+	template_name="app/publicaciones_list.html"
 	paginate_by = 24
 
 def PublicacionesView(request, cat='nn'):

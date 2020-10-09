@@ -6,7 +6,7 @@
 {% block content %}
 <ol class="breadcrumb">
 	<li><a href="{% url 'core:home' %}">Inicio</a></li>
-	<li><a href="{% url 'app:publicaciones-list' %}">Publicaciones MESI</a></li>
+	<li><a href="{% url 'app:publicaciones-list' 'nn' %}">Publicaciones MESI</a></li>
 	<li class="active">{{ publicacion.titulo }}</li>
 </ol>
 

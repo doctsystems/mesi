@@ -10,25 +10,33 @@
 	<li class="active">{{ actividad.fecha_inicio }}</li>
 </ol>
 
-<h1>Lugar: {{ actividad.lugar }}</h1>
+<h1>{{ actividad.titulo }}</h1>
 <hr>
 
 <div class="page-content row">
 	<div class="col-12" >
-		<div class="actividades col-md-12 card">
-			<span class="fecha">
-				<h4><a href="{{ actividad.get_absolute_url }}">{{actividad.titulo}}</a></h4>
-			</span>
-			<span class="fecha">
-				<strong>{{actividad.fecha_inicio|date:'Y-m-d' }} - {{actividad.hora_inicio}}</strong>
-			</span>
-			<div class="atividad-name-home"><strong>
-				<span>{{actividad.lugar}} </span></strong><br>
-				<span aria-hidden="true">
-					{{actividad.desarrollo|safe|truncatechars:"100"}}
-				</span><br>
+		<div class="col-md-4">
+			<div class="image-content-detail">
+			{% if actividad.logo %}
+				<a href="{{ actividad.logo.url }}"><img alt="" src="{{ actividad.logo.url }}" class="img-fluid mx-auto"/></a>
+			{% else %}
+				<img src="/media/publicaciones/img/nn.png" alt="" class="card-img-top img-thumbnail">
+			{% endif %}
 			</div>
-			<hr>
+		</div>
+		<div class="actividades col-md-12 card">
+			<span class="fecha"><b>Fecha y hora del evento: </b>
+				{{actividad.fecha_inicio|date:'Y-m-d' }}  {{actividad.hora_inicio}}
+			</span>
+			<div class="atividad-name-home">
+				<b>Lugar del evento: </b>{{actividad.lugar}}<br>
+				<span aria-hidden="true"><br><b>Descripcion: </b>
+					{{actividad.desarrollo|safe}}
+				</span>
+			</div>
+			{% if actividad.link %}
+				<b>Link de registro: </b>{{actividad.link}}<br>
+			{% endif %}
 		</div>
 	</div>
 </div>
