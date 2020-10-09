@@ -62,17 +62,17 @@ def main(id, urlNational, urlRegional, urlSector):
         #file_grp = os.path.join('in','sg_GRP_wAgr.csv')
 
     # Para Windows
-    file_mip = BASE_DIR + urlNational.replace("/", "\\")
-    print(file_mip, '  *************************')
-    file_vbps = BASE_DIR + urlRegional.replace("/", "\\")
-    print(file_vbps, '  *************************')
-    file_grp = BASE_DIR + urlSector.replace("/", "\\")
-    print(file_grp, '  *************************')
+    # file_mip = BASE_DIR + urlNational.replace("/", "\\")
+    # print(file_mip, '  *************************')
+    # file_vbps = BASE_DIR + urlRegional.replace("/", "\\")
+    # print(file_vbps, '  *************************')
+    # file_grp = BASE_DIR + urlSector.replace("/", "\\")
+    # print(file_grp, '  *************************')
 
     # Para Linux
-    # file_mip = os.path.join(BASE_DIR, urlNational)
-    # file_vbps = os.path.join(BASE_DIR, urlRegional)
-    # file_grp = os.path.join(BASE_DIR, urlSector)
+    file_mip = BASE_DIR + urlNational
+    file_vbps = BASE_DIR + urlRegional
+    file_grp = BASE_DIR + urlSector
 
     lookup_mip, lookup_vbp, lookup_zip = lecturaGRP(file_grp, flagzip=True)
     mip_global = lecturaMIP(file_mip, lookup_mip)
@@ -87,7 +87,8 @@ def main(id, urlNational, urlRegional, urlSector):
     # folderout = 'out-%d-%d-%d.%d' % (t.hour,t.minute,t.second,t.microsecond)
     # ruta=BASE_DIR + '\\outs\\%s' % id
     # folderout = BASE_DIR + '\\outs\\%s' % id
-    folderout = BASE_DIR + '\\media\\downloads\\files\\out'
+    # folderout = BASE_DIR + '\\media\\downloads\\files\\out'
+    folderout = BASE_DIR + '/media/downloads/files/out'
     if os.path.exists(folderout) == False:
         os.mkdir(folderout)
 

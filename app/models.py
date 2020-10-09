@@ -99,6 +99,10 @@ class Actividad(ModeloBase):
 	lugar = models.CharField(max_length=100, help_text="Lugar del evento")
 	desarrollo = RichTextField(help_text="Descripcion de la actividad")
 	integrantes = models.ManyToManyField(Investigador)
+	link = models.URLField(max_length=200, help_text="Formulario de registro", null=True, blank=True)
+	logo = StdImageField(upload_to='actividades/logos/',
+		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
+		null=True, blank=True)
 
 	class Meta:
 		verbose_name_plural = "Actividades"
