@@ -3,9 +3,11 @@ import sys
 import pandas as pd
 import numpy as np
 import datetime
-from functions import _calc_SLQ, _calc_FLQ, _calc_AFLQ, _coef_tecnicos
-from reading_functions import lecturaMIP, lecturaVBP, lecturaGRP
-from grouping_functions import agruparMatrices, zipMatrices
+from pde.functions import _calc_SLQ, _calc_FLQ, _calc_AFLQ, _coef_tecnicos
+from pde.reading_functions import lecturaMIP, lecturaVBP, lecturaGRP
+from pde.grouping_functions import agruparMatrices, zipMatrices
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def calc_SLQ(vbp_global, vbp_local):
     slq = _calc_SLQ(vbp_global,vbp_local)
@@ -39,15 +41,26 @@ def calc_MIP_local(mip_global, vbp_global, vbp_local, metodo):
             mip[i][j] = matParams[i][j] * coef[i][j]
     return mip, coef, slq, matParams
 
-def main(file_mip, file_vbps, file_grp):
+# def main(file_mip, file_vbps, file_grp):
+def main(id, urlNational, urlRegional, urlSector):
     metodos = ['FLQ','AFLQ']
+
+    # Para Windows
+    # file_mip = BASE_DIR + urlNational.replace("/", "\\")
+    # file_vbps = BASE_DIR + urlRegional.replace("/", "\\")
+    # file_grp = BASE_DIR + urlSector.replace("/", "\\")
+
+    # Para Linux
+    file_mip = BASE_DIR + urlNational
+    file_vbps = BASE_DIR + urlRegional
+    file_grp = BASE_DIR + urlSector
     
     try:
         lookup_mip, lookup_vbp, lookup_zip = lecturaGRP(file_grp, flagzip=True)
         mip_global = lecturaMIP(file_mip, lookup_mip)    
         sc_vbp, vbp_global, vbp_locales, vbp_reg = lecturaVBP(file_vbps, lookup_vbp)
     except ValueError as inst:
-        print("Files reading error:", inst)
+        raise ValueError("Files reading error:", inst)
     else:           
         sc_vbp_out, out_mip_global, out_vbp_global, out_vbp_locales = agruparMatrices(mip_global, vbp_global, vbp_locales, sc_vbp, lookup_mip, lookup_vbp)
         # hacer el zip si hay una nueva agrupacion de sectores
@@ -56,7 +69,13 @@ def main(file_mip, file_vbps, file_grp):
     
             	
         t = datetime.datetime.now()
-        folderout = 'out-%d-%d-%d.%d' % (t.hour,t.minute,t.second,t.microsecond)
+        # folderout = 'out-%d-%d-%d.%d' % (t.hour,t.minute,t.second,t.microsecond)
+
+        # Para Windows
+        folderout = BASE_DIR + '\\media\\downloads\\files\\out'
+        # Para Linux
+        # folderout = BASE_DIR + '/media/downloads/files/out'
+
         if os.path.exists(folderout) == False:
             os.mkdir(folderout)
     

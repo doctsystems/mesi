@@ -2,20 +2,21 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from .forms import RegMIPForm
-from .upfiles import main
+# from .upfiles import main
+from .test2metodos import main
 
 def in_file(request):
+	error = False
 	if request.method == 'POST':
 		form = RegMIPForm(request.POST, request.FILES)
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.save()
-			# return redirect('post_detail', pk=post.pk)
-			# print('post------------> ',post.nacional)
-			# _id=post.pk
-			main(post.pk, post.nacional.url, post.regional.url, post.sector.url)
-			# main(post.pk, post.nacional, post.nacional, post.nacional)
-			# main(post.pk)
+			try:
+				main(post.pk, post.nacional.url, post.regional.url, post.sector.url)
+			except ValueError as e:
+				error = True
+				return render(request, 'pde/in.html', {'form': form, 'error': error, 'msj': e})
 			return HttpResponseRedirect(reverse('pde:out'))
 	else:
 		form = RegMIPForm()

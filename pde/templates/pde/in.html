@@ -11,12 +11,35 @@
 </ol>
 
 <div class="col">
+    <!-- Errors -->
+    {% if error %}
+        <div class="alert alert-danger alert-dismissible show" role="alert">
+          <strong>Error!</strong> {{msj}}.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    {% endif %}
     <h3>Formulario de Matrices</h3><hr></br>
-    <form enctype="multipart/form-data" action="" method="POST" class="post-form">
+    <!-- <form enctype="multipart/form-data" action="" method="POST" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}
         <br>
         <input type="submit" class="btn btn-primary btn-block py-2" value="Enviar">
+    </form> -->
+    <form enctype="multipart/form-data" action="" method="POST" class="post-form">
+        {% csrf_token %}
+        <p><label for="id_nacional">National I-O Matrix:</label>
+        	<input type="file" name="nacional" class="form-control" required id="id_nacional">
+        </p>
+		<p><label for="id_regional">Regional GPV:</label>
+			<input type="file" name="regional" class="form-control" required id="id_regional">
+		</p>
+		<p><label for="id_sector">Sectors Matching for Aggregation:</label>
+			<input type="file" name="sector" class="form-control" required id="id_sector">
+		</p>
+        <br>
+        <input type="submit" class="btn btn-primary btn-block py-2" value="Calculate Regional I-O Matrix">
     </form>
 </div>
 {% endblock %}
