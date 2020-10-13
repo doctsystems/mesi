@@ -115,7 +115,7 @@ JAZZMIN_SETTINGS = {
 
     # Top Menu #
     'topmenu_links': [
-        {'name': 'VER SITIO WEB',  'url': 'core:home', 'permissions': ['auth.view_user']},
+        {'name': 'VER SITIO WEB',  'url': 'core:home',},
         # external url that opens in a new window (Permissions can be added)
         # {'name': 'Support', 'url': 'https://github.com/farridav/django-jazzmin/issues', 'new_window': True},
         # {'model': 'auth.User'},
