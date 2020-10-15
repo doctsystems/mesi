@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block css_extra %}
+<style type="text/css">
+    .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    }
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+</style>
+{% endblock %}
+
 {% block title %} MESI - Matrices {% endblock %}
 
 {% block content %}
@@ -20,7 +41,7 @@
           </button>
         </div>
     {% endif %}
-    <h3>Formulario de Matrices</h3><hr></br>
+    <h3>Regional I-O MATRIX</h3><hr></br>
     <!-- <form enctype="multipart/form-data" action="" method="POST" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}
@@ -40,6 +61,21 @@
 		</p>
         <br>
         <input type="submit" class="btn btn-primary btn-block py-2" value="Calculate Regional I-O Matrix">
+
     </form>
+    <!-- <input id="uploadFile" placeholder="Choose File" disabled="disabled" />
+    <div class="fileUpload btn btn-primary">
+        <span>Upload</span>
+        <input id="uploadBtn" type="file" class="upload" />
+    </div> -->
 </div>
+{% endblock %}
+
+{% block js_extra %}
+<!-- <script src="{% static 'core/scripts/bootstrap-filestyle.js' %}"></script> -->
+<!-- <script type="text/javascript">
+    document.getElementById("uploadBtn").onchange = function () {
+        document.getElementById("uploadFile").value = this.value;
+    };
+</script> -->
 {% endblock %}

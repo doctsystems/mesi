@@ -42,7 +42,7 @@ def calc_MIP_local(mip_global, vbp_global, vbp_local, metodo):
     return mip, coef, slq, matParams
 
 # def main(file_mip, file_vbps, file_grp):
-def main(id, urlNational, urlRegional, urlSector):
+def main(urlNational, urlRegional, urlSector):
     metodos = ['FLQ','AFLQ']
 
     # Para Windows
@@ -72,13 +72,18 @@ def main(id, urlNational, urlRegional, urlSector):
         # folderout = 'out-%d-%d-%d.%d' % (t.hour,t.minute,t.second,t.microsecond)
 
         # Para Windows
-        # folderout = BASE_DIR + '\\media\\downloads\\files\\out'
+        folderout = BASE_DIR + '\\media\\downloads\\files\\out'
         
         # Para Linux
-        folderout = BASE_DIR + '/media/downloads/files/out'
+        # folderout = BASE_DIR + '/media/downloads/files/out'
 
-        if os.path.exists(folderout) == False:
-            os.mkdir(folderout)
+        from shutil import rmtree
+        rmtree(folderout)
+        os.mkdir(folderout)
+
+        outs=[]
+        # if os.path.exists(folderout) == False:
+        #     os.mkdir(folderout)
     
         for metodo in metodos:
             for i,region in enumerate(vbp_reg):
@@ -98,15 +103,21 @@ def main(id, urlNational, urlRegional, urlSector):
                 reglist.append(region)
                 df_slq = pd.DataFrame(columns=reglist, data=np.asarray(slq).squeeze())
                 df_slq.insert(0,'SECTOR',sc_vbp_out)
-        
+                
+                file_out='MIP_%s_%s.xlsx' % (region,metodo)
+                # print(file_out)
                 output_filename = os.path.join(folderout,'MIP_%s_%s.xlsx' % (region,metodo))
+                print(output_filename)
+                outs.append(file_out)
+                # print(outs)
+
                 with pd.ExcelWriter(output_filename) as writer:
                     df_mip.to_excel(writer, index=False, sheet_name='MIP')
                     df_par.to_excel(writer, index=False, sheet_name=metodo)
                     df_coef.to_excel(writer, index=False, sheet_name='Coefficients')
                     df_slq.to_excel(writer, index=False, sheet_name='SLQ')
                     writer.save()
-            
+        return outs
 
 if __name__ == "__main__":
     file_mip = os.path.join('in','sg_MIP_Arg.csv')

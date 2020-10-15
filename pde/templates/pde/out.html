@@ -11,12 +11,12 @@
 	<li class="active">Formulario de resultados</li>
 </ol>
 
-<h1>Formulario de resultados</h1>
+<h1>Regional I-O MATRIX - Results</h1>
 <hr>
 
 <div class="page-content row">
 	<div class="col-12" >
-		<div class="col-md-8 fecha-dato">
+		<!-- <div class="col-md-8 fecha-dato">
 			<p>
 				<strong>Archivo MIP_BAC_FLQ </strong>
 				<a target="_blank" class="btn btn-default" role="button" href="/media/downloads/files/out/MIP_BAC_FLQ.xlsx">
@@ -43,7 +43,15 @@
 					<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
 				</a>
 			</p>
-		</div>
+		</div> -->
+		{% for file in files %}
+			<p>
+				<strong>Archivo {{file|slice:":-5"}} </strong>
+				<a target="_blank" class="btn btn-default" role="button" href="/media/downloads/files/out/{{file}}">
+					<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo
+				</a>
+			</p>
+		{% endfor %}
 	</div>
 </div>
 
