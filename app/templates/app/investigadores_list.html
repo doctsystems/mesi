@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} MESI - Integrantes {% endblock %}
+{% block title %} MESi Modelos Económicos de Simulación - Integrantes {% endblock %}
 
 {% block content %}
 <ol class="breadcrumb">
@@ -9,12 +9,29 @@
 	<li class="active">Integrantes</li>
 </ol>
 
-<div class="row integrantes">
-	<h2>Integrantes de MESI</h2>
-	<hr>
-	{% if investigador_list %}
+<div class=" integrantes">
+	<h2>Integrantes de MESi</h2>
+
+	<div >
+
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" class="active"><a href="#investigadores" aria-controls="investigadores" role="tab" data-toggle="tab">Investigadores</a></li>
+		  <li role="presentation"><a href="#asociados" aria-controls="asociados" role="tab" data-toggle="tab">Investigadores Asociados</a></li>
+		  <li role="presentation"><a href="#becarios" aria-controls="becarios" role="tab" data-toggle="tab">Becarios</a></li>
+		  <li role="presentation"><a href="#auxiliares" aria-controls="auxiliares" role="tab" data-toggle="tab">Auxiliares</a></li>
+		  <li role="presentation"><a href="#otros" aria-controls="otros" role="tab" data-toggle="tab">Otros</a></li>
+
+		</ul>
+	  
+		<!-- Tab panes -->
+		<div class="tab-content">
+		  <div role="tabpanel" class="tab-pane active" id="investigadores" style="padding-top:15px;" >
+			  
+
+		{% if investigador_list %}
 		{% for investigador in investigador_list %}
-			<div class="col-md-4 integrante" style="max-width:32%;">
+			<div class="col-md-6 integrante" >
 				<a href="{{ investigador.get_absolute_url }}">
 					<div class="img-integrante col-md-6">
 						{% if investigador.avatar %}
@@ -30,10 +47,52 @@
 					</div>
 				</a>
 			</div>
+			
 		{% endfor %}
 	{% else %}
 		<div class="alert alert-info">No existen investigadores...</div>
 	{% endif %}
+	<div style="clear: both;"></div>
+		  </div>
+		  <div role="tabpanel" class="tab-pane" id="asociados" style="padding-top:15px;">
+		
+				  
+
+			{% if investigador_list %}
+			{% for investigador in investigador_list %}
+				<div class="col-md-6 integrante" >
+					<a href="{{ investigador.get_absolute_url }}">
+						<div class="img-integrante col-md-6">
+							{% if investigador.avatar %}
+							<img src="{{ investigador.avatar.url }}" alt="Avatar" style="border-radius: 50%;">
+							{% else %}
+							<img src="/media/investigadores/img/avatar/nn.png" alt="Avatar">
+							{% endif %}
+						</div>
+						<div class="info-integrante col-md-6">
+							<h4>{{ investigador }}</h4>              
+							<p>{{ investigador.perfil }}</p>
+							<p>{{ investigador.get_tipo_display }}</p>
+						</div>
+					</a>
+				</div>
+				
+			{% endfor %}
+		{% else %}
+			<div class="alert alert-info">No existen investigadores...</div>
+		{% endif %}
+		<div style="clear: both;"></div>
+		
+		
+		</div>
+		  <div role="tabpanel" class="tab-pane" id="becarios" style="padding-top:15px;">tt.</div>
+		  <div role="tabpanel" class="tab-pane" id="auxiliares" style="padding-top:15px;" >.kk.</div>
+		  <div role="tabpanel" class="tab-pane" id="otros" style="padding-top:15px;">.pp..</div>
+		</div>
+	  
+	  </div>
+	
+	
 </div>
 
 {% include 'includes/paginacion.html' %}
