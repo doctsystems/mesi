@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} MESI - Detalles {% endblock %}
+{% block title %} MESi - Detalles {% endblock %}
 
 {% block content %}
 <ol class="breadcrumb">
 	<li><a href="{% url 'core:home' %}">Inicio</a></li>
-	<li><a href="{% url 'app:proyectos-list' %}">Proyectos MESI</a></li>
+	<li><a href="{% url 'app:proyectos-list' %}">Proyectos MESi</a></li>
 	<li class="active">{{ proyecto.titulo }}</li>
 </ol>
 

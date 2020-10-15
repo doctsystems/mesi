@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} MESI - Home {% endblock %}</title>
+    <title>{% block title %} MESi - Modelos Económicos de Simulación - Home {% endblock %}</title>
    
     <link rel="stylesheet" type="text/css" href="{% static 'core/content/style.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'core/content/bootstrap.min.css' %}" />
@@ -24,7 +24,7 @@
       <div class="col-6 col-md-4 text-left">
         <a class="text-muted" href="/">
           <!-- <img class="img-fluid logo2 " src="http://iiep-baires.econ.uba.ar/images/logo.png" style="" alt="Instituto de Investigaciones EconÃ³micas"> -->
-          <img class="img-fluid logo2 " src="{% static 'core/img/logo.jpg' %}" style="" alt="Instituto de Investigaciones Económicas">
+          <img class="img-fluid logo2 " src="{% static 'core/img/logo.png' %}" style="" alt="MESi (Modelos Económicos de Simulación)">
         </a>
       </div>
       <div class="col-6 col-md-4 text-right text-md-center">
@@ -72,8 +72,12 @@
   {% include 'includes/navbar.html' %}
 
   <div class="body-content container">
+    <div class="row">
+      <div class="col">
     {% block content %}
     {% endblock %}
+  </div>
+</div>
   </div>
 
   {% include 'includes/footer.html' %}
