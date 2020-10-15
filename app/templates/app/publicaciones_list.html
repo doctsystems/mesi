@@ -9,13 +9,42 @@
 	<li class="active">Publicaciones</li>
 </ol>
 <h1>Publicaciones MESi</h1>
-<hr>
+<div>
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#todas" aria-controls="todas" role="tab" data-toggle="tab">Todas</a></li>
+		<li role="presentation"><a href="#notas" aria-controls="notas" role="tab" data-toggle="tab">Notas </a></li>
+		<li role="presentation"><a href="#informes" aria-controls="informes" role="tab" data-toggle="tab">Informes técnicos</a></li>
+		<li role="presentation"><a href="#publicaciones" aria-controls="publicaciones" role="tab" data-toggle="tab">Publicaciones académicas</a></li>
+		<li role="presentation"><a href="#otros" aria-controls="otros" role="tab" data-toggle="tab">Otros</a></li>
+
+	  </ul>
+
+	  <!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="todas" style="padding-top:15px;" >
+				
+				<div style="clear: both;"></div>
+		  </div>
+		  <div role="tabpanel" class="tab-pane" id="notas" style="padding-top:15px;">jjj
+			<div style="clear: both;"></div>
+		</div>
+		  <div role="tabpanel" class="tab-pane" id="informes" style="padding-top:15px;">kkk
+			<div style="clear: both;"></div>
+		</div>
+		  <div role="tabpanel" class="tab-pane" id="publicaciones" style="padding-top:15px;">lll
+			<div style="clear: both;"></div>
+		</div>
+		  <div role="tabpanel" class="tab-pane" id="otros" style="padding-top:15px;">eee
+			<div style="clear: both;"></div>
+		</div>
+
+	</div>
 
 <div class="page-content">
 	<div class="col-md-12">
 		{% if publicaciones %}<!-- publicaciones_list > class view o if publicaciones > def view -->
 			{% for publicacion in publicaciones %}
-				<div class="card col-md-3 publicaciones">
+				<div class="card col-md-4 publicaciones">
 					<div class="image-content">
 						{% if publicacion.imagen %}
 							<a href="{{ publicacion.imagen.url }}"><img alt="" src="{{ publicacion.imagen.url }}" class="card-img-top img-thumbnail"/></a>
