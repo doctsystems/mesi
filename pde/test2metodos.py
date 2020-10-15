@@ -72,9 +72,10 @@ def main(id, urlNational, urlRegional, urlSector):
         # folderout = 'out-%d-%d-%d.%d' % (t.hour,t.minute,t.second,t.microsecond)
 
         # Para Windows
-        folderout = BASE_DIR + '\\media\\downloads\\files\\out'
+        # folderout = BASE_DIR + '\\media\\downloads\\files\\out'
+        
         # Para Linux
-        # folderout = BASE_DIR + '/media/downloads/files/out'
+        folderout = BASE_DIR + '/media/downloads/files/out'
 
         if os.path.exists(folderout) == False:
             os.mkdir(folderout)
