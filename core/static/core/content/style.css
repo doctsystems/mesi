@@ -431,3 +431,11 @@ a {
 
    
 }
+
+
+/* sitio internas */
+
+.col-md-4
+{
+    min-height: 200px!important;
+}

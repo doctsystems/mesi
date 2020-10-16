@@ -25,13 +25,13 @@
 			</p>
 		</div>
 		<div class="col-md-8 fecha-proyecto">
-			<p><strong>Autores: </strong>
+			<p><strong>Autor/es: </strong>
 				{% for autor in proyecto.integrantes.all %}
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
-			<p><strong>Copete: </strong>{{ proyecto.copete|safe }}</p>
-			<p><strong>Desarrollo: </strong>{{ proyecto.desarrollo|safe }}</p>
+			<p><strong>Cita APA: </strong>{{ proyecto.copete|safe }}</p>
+			<p><strong>Resumen/Abstract: </strong>{{ proyecto.desarrollo|safe }}</p>
 			<p><strong>Archivos: </strong>
 				{% for file in proyecto.archivo_set.all %}
 					<a target="_blank" class="btn btn-default" role="button" href="{{ file.archivo.url }}">

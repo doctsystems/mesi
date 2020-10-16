@@ -26,15 +26,15 @@
 		</div>
 		<div class="col-md-8 fecha-publicacion">
 			<p><strong>{{ publicacion.fecha }}</strong></p>
-			<p><strong>Autores: </strong>
+			<p><strong>Autor/es: </strong>
 				{% for autor in publicacion.integrantes.all %}
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
 			{% if publicacion.copete %}
-				<p><strong>Copete: </strong>{{ publicacion.copete|safe }}</p>
+				<p><strong>Cita APA: </strong>{{ publicacion.copete|safe }}</p>
 			{% endif %}
-			<p><strong>Desarrollo: </strong>{{ publicacion.desarrollo|safe }}</p>
+			<p><strong>Resumen/Abstract: </strong>{{ publicacion.desarrollo|safe }}</p>
 			{% if publicacion.video %}
 				<p><strong>Video: </strong>
 					{% if publicacion.video %}
