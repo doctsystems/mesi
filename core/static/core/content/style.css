@@ -288,9 +288,7 @@ a {
     font-size: 12px;
 }
 
-.integrante {
-    margin-bottom: 25px;
-}
+
 
 .info-integrante {
     padding-right: 0 !important;
@@ -438,4 +436,11 @@ a {
 .col-md-4
 {
     min-height: 200px!important;
+}
+
+.integrante
+{
+    min-height: 180px;
+    
+    margin-bottom: 15px;
 }

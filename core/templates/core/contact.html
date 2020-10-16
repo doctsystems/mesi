@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="col">
+<div >
     <!-- Formulario de contacto -->
     {% if 'ok' in request.GET %}
         <div class="alert alert-success alert-dismissible show" role="alert">
@@ -16,7 +16,7 @@
         </div>
     {% endif %}
     <h3>Formulario de Contacto</h3><hr></br>
-    <form action="" method="POST" class="row justify-content-md-center">
+    <form action="" method="POST" class="">
         {% csrf_token %}
         <div class="form-group">
             <label for="name">Nombre *</label>
