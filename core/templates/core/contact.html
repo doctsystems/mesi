@@ -5,6 +5,11 @@
 
 {% block content %}
 
+<ol class="breadcrumb">
+	<li><a href="{% url 'core:home' %}">Inicio</a></li>
+	<li class="active">Contacto</li>
+</ol>
+
 <div >
     <!-- Formulario de contacto -->
     {% if 'ok' in request.GET %}
