@@ -1,0 +1,37 @@
+<div style="clear: both;">
+	<div class="page-content">
+		<div class="col-md-12">
+			{% if datos %}<!-- if publicaciones para la funcion def PublicacionesView-->
+				{% for dato in datos %}<!-- for publicacion in publicaciones -->
+				{% if dato.categoria == "ene" %}
+					<div class="card col-md-3 datos">
+						<div class="card-body">
+							<h5 class="card-title">
+								<a href="{{ dato.get_absolute_url }}">
+									{{ dato.titulo }}
+								</a>
+							</h5>
+							<div class="date">
+								{% for autor in dato.autores.all %}
+									<span>{{ autor }},</span>
+								{% endfor %}
+							</div>
+							{% if dato.copete %}
+								<p>{{dato.copete|striptags|safe|truncatechars:"200"}}</p>
+							{% else %}
+								<p>{{dato.desarrollo|striptags|safe|truncatechars:"200"}}</p>
+							{% endif %}
+							<p><a href="{{ dato.get_absolute_url }}">
+								<strong>Continuar leyendo...</strong> 
+								</a>
+							</p>
+						</div>
+					</div>
+				{% endif %}
+				{% endfor %}
+			{% else %}
+				<div class="alert alert-info">No existen datos...</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

@@ -51,10 +51,10 @@ class Publicacion(ModeloBase):
 		('otr', 'Otro'),
 	)
 	categoria = models.CharField(max_length=3, choices=tipos, default='nn')
-	titulo = models.CharField(max_length=300, null=True, blank=True, help_text="Titulo de la Publicacion")
+	titulo = models.CharField(max_length=300, help_text="Titulo de la Publicacion")
 	fecha = models.DateField(help_text="Fecha de publicacion")
-	copete = RichTextField(help_text="Copete", null=True, blank=True)
-	desarrollo = RichTextField(help_text="Contenido de la publicacion")
+	cita_APA = RichTextField(help_text="cita_APA", null=True, blank=True)
+	resumen_Abstract = RichTextField(help_text="Contenido de la publicacion")
 	imagen = StdImageField(upload_to='publicaciones/img/',
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
@@ -62,6 +62,7 @@ class Publicacion(ModeloBase):
 	integrantes = models.ManyToManyField(Investigador)
 	medios = models.CharField(max_length=100, null=True, blank=True)
 	link = models.URLField(max_length=200, null=True, blank=True, help_text="Link al medio")
+	doi = models.URLField(max_length=200, null=True, blank=True, help_text="Link DOI")
 	es_novedad = models.BooleanField(default=False)
 
 	class Meta:
@@ -77,7 +78,7 @@ class Proyecto(ModeloBase):
 	titulo = models.CharField(max_length=300, help_text="Titulo del Proyecto")
 	fecha_inicio = models.DateField(help_text="Fecha de inicio")
 	fecha_final = models.DateField(help_text="Fecha de finalizacion", null=True, blank=True)
-	desarrollo = RichTextField(help_text="Descripcion del proyecto")
+	resumen_Abstract = RichTextField(help_text="Descripcion del proyecto")
 	terminado = models.BooleanField(default=False)
 	integrantes = models.ManyToManyField(Investigador)
 
@@ -97,10 +98,13 @@ class Actividad(ModeloBase):
 	hora_inicio = models.TimeField(help_text="Hora de inicio")
 	hora_final = models.TimeField(help_text="Hora de finalizacion", null=True, blank=True)
 	lugar = models.CharField(max_length=100, help_text="Lugar del evento")
-	desarrollo = RichTextField(help_text="Descripcion de la actividad")
+	resumen_Abstract = RichTextField(help_text="Descripcion de la actividad")
 	integrantes = models.ManyToManyField(Investigador)
 	link = models.URLField(max_length=200, help_text="Formulario de registro", null=True, blank=True)
 	logo = StdImageField(upload_to='actividades/logos/',
+		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
+		null=True, blank=True)
+	flyer = StdImageField(upload_to='actividades/flyers/',
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
 
@@ -116,8 +120,8 @@ class Actividad(ModeloBase):
 class Novedad(ModeloBase):
 	titulo = models.CharField(max_length=300)
 	fecha = models.DateField(help_text="Fecha de ocurrencia")
-	copete = RichTextField(help_text="Copete", null=True, blank=True)
-	desarrollo = RichTextField(help_text="Descripcion de la novedad")
+	cita_APA = RichTextField(help_text="cita_APA", null=True, blank=True)
+	resumen_Abstract = RichTextField(help_text="Descripcion de la novedad")
 	imagen = StdImageField(upload_to='novedades/img/', 
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
@@ -144,8 +148,8 @@ class Dato(ModeloBase):
 	categoria = models.CharField(max_length=3, choices=tipos, default='nn')
 	fecha = models.DateField(help_text="Fecha...")
 	titulo = models.CharField(max_length=300, help_text="Titulo...")
-	copete = RichTextField(help_text="Copete", null=True, blank=True)
-	desarrollo = RichTextField(help_text="Descripcion...")
+	cita_APA = RichTextField(help_text="cita_APA", null=True, blank=True)
+	resumen_Abstract = RichTextField(help_text="Descripcion...")
 	imagen = StdImageField(upload_to='datos/img/', 
 		variations={'thumbnail': {"width": 240, "height": 200, "crop": True}},
 		null=True, blank=True)
@@ -240,10 +244,10 @@ class ProyectoIIEP(models.Model):
 class ActividadIIEP(models.Model):
 	titulo_espanol = models.CharField(max_length=255, blank=True, null=True)
 	texto_espanol = models.TextField(blank=True, null=True)
-	copete_espanol = models.CharField(max_length=255, blank=True, null=True)
+	cita_APA_espanol = models.CharField(max_length=255, blank=True, null=True)
 	titulo_ingles = models.CharField(max_length=255, blank=True, null=True)
 	texto_ingles = models.TextField(blank=True, null=True)
-	copete_ingles = models.CharField(max_length=255, blank=True, null=True)
+	cita_APA_ingles = models.CharField(max_length=255, blank=True, null=True)
 	investigador_id = models.IntegerField(blank=True, null=True)
 	fecha = models.IntegerField(blank=True, null=True)
 	hora = models.CharField(max_length=255, blank=True, null=True)

@@ -36,34 +36,10 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'app:publicaciones-iiep' %}">Publicaciones IIEP</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'nn' %}">Publicaciones MESi</a>
-
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'not' %}">Notas</a>
-
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'inf' %}">Informes Técnicos</a>
-
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'pub' %}">Publicaciones Académicas </a>
-
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'app:publicaciones-list' 'tes' %}">Tesis</a>
-            </div>                                        
+              <a class="dropdown-item" href="{% url 'app:publicaciones-list'%}">Publicaciones MESi</a>                                       
           </li>
           <li><a href="{% url 'app:novedades-list' %}">Novedades</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Datos</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'app:datos-list' 'ene' %}">Energía y ambiente</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'app:datos-list' 'sec' %}">Datos Sectoriales</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'app:datos-list' 'mat' %}">Datos Matriciales </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'app:datos-list' 'com' %}">Comercio</a>
-            </div>                                        
-          </li>
+          <li><a href="{% url 'app:datos-list' %}">Datos</a></li>
           <li><a href="{% url 'pde:in' %}">Modelos</a></li>
           <li><a href="{% url 'core:contacto' %}">Contacto</a></li>
         </ul>

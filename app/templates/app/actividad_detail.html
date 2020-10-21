@@ -18,7 +18,7 @@
 		<div class="col-md-4">
 			<div class="image-content-detail">
 			{% if actividad.logo %}
-				<a href="{{ actividad.logo.url }}"><img alt="" src="{{ actividad.logo.url }}" class="img-fluid mx-auto"/></a>
+				<a href="{{ actividad.logo.url }}" target="_blank"><img alt="" src="{{ actividad.logo.url }}" class="card-img-top mx-auto img-thumbnail"/></a>
 			{% else %}
 				<img src="/media/publicaciones/img/nn.png" alt="" class="card-img-top img-thumbnail">
 			{% endif %}
@@ -26,18 +26,28 @@
 		</div>
 		<div class="actividades col-md-12 card">
 			<span class="fecha"><b>Fecha y hora del evento: </b>
-				{{actividad.fecha_inicio|date:'Y-m-d' }}  {{actividad.hora_inicio}}
+				{{actividad.fecha_inicio|date:'d-m-Y' }}  {{actividad.hora_inicio}}
 			</span>
 			<div class="atividad-name-home">
 				<b>Lugar del evento: </b>{{actividad.lugar}}<br>
 				<span aria-hidden="true"><br><b>Descripcion: </b>
-					{{actividad.desarrollo|safe}}
+					{{actividad.resumen_Abstract|safe}}
 				</span>
 			</div>
 			{% if actividad.link %}
 				<b>Link de registro: </b>{{actividad.link}}<br>
 			{% endif %}
 		</div>
+		<div class="image-content-detail">
+			<b>Flyer del evento: </b><br>
+			{% if actividad.flyer %}
+				<a href="{{ actividad.flyer.url }}" target="_blank"><img 
+					src="{{ actividad.flyer.url }}" class="card-img-top mx-auto img-thumbnail"/>
+				</a>
+			{% else %}
+				<img src="/media/publicaciones/img/nn.png" alt="" class="card-img-top img-thumbnail">
+			{% endif %}
+			</div>
 	</div>
 </div>
 {% endblock %}

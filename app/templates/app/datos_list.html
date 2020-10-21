@@ -17,53 +17,20 @@
 	<li role="presentation"><a href="#matriciales" aria-controls="matriciales" role="tab" data-toggle="tab">Datos Matriciales</a></li>
 	<li role="presentation"><a href="#comercio" aria-controls="comercio" role="tab" data-toggle="tab">Comercio</a></li>
 
-  </ul>
+</ul>
 
-  <div class="tab-content">
-	<div role="tabpanel" class="tab-pane active" id="energia" style="padding-top:15px;" >
-		<div style="clear: both;"></div>
+<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active" id="energia" style="padding-top:15px;">
+		{% include 'includes/datos/energia.html' %}
 	</div>
-	<div role="tabpanel" class="tab-pane" id="sectoriales" style="padding-top:15px;">tt.
-		<div style="clear: both;"></div>
+	<div role="tabpanel" class="tab-pane" id="sectoriales" style="padding-top:15px;">
+		{% include 'includes/datos/sectoriales.html' %}
 	</div>
-	<div role="tabpanel" class="tab-pane" id="matriciales" style="padding-top:15px;" >.kk.
-		<div style="clear: both;"></div>
+	<div role="tabpanel" class="tab-pane" id="matriciales" style="padding-top:15px;">
+		{% include 'includes/datos/matriciales.html' %}
 	</div>
-	<div role="tabpanel" class="tab-pane" id="comercio" style="padding-top:15px;">.pp..
-		<div style="clear: both;"></div>
-	</div>
-  </div>
-<div class="page-content">
-	<div class="col-md-12">
-		{% if datos %}<!-- if publicaciones para la funcion def PublicacionesView-->
-			{% for dato in datos %}<!-- for publicacion in publicaciones -->
-				<div class="card col-md-3 datos">
-					<div class="card-body">
-						<h5 class="card-title">
-							<a href="{{ dato.get_absolute_url }}">
-								{{ dato.titulo }}
-							</a>
-						</h5>
-						<div class="date">
-							{% for autor in dato.autores.all %}
-								<span>{{ autor }},</span>
-							{% endfor %}
-						</div>
-						{% if dato.copete %}
-							<p>{{dato.copete|striptags|safe|truncatechars:"200"}}</p>
-						{% else %}
-							<p>{{dato.desarrollo|striptags|safe|truncatechars:"200"}}</p>
-						{% endif %}
-						<p><a href="{{ dato.get_absolute_url }}">
-							<strong>Continuar leyendo...</strong> 
-							</a>
-						</p>
-					</div>
-				</div>
-			{% endfor %}
-		{% else %}
-			<div class="alert alert-info">No existen datos...</div>
-		{% endif %}
+	<div role="tabpanel" class="tab-pane" id="comercio" style="padding-top:15px;">
+		{% include 'includes/datos/comercio.html' %}
 	</div>
 </div>
 {% endblock %}

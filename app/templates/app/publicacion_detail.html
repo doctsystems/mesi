@@ -6,7 +6,7 @@
 {% block content %}
 <ol class="breadcrumb">
 	<li><a href="{% url 'core:home' %}">Inicio</a></li>
-	<li><a href="{% url 'app:publicaciones-list' 'nn' %}">Publicaciones MESI</a></li>
+	<li><a href="{% url 'app:publicaciones-list'%}">Publicaciones MESI</a></li>
 	<li class="active">{{ publicacion.titulo }}</li>
 </ol>
 
@@ -31,17 +31,15 @@
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
-			{% if publicacion.copete %}
-				<p><strong>Cita APA: </strong>{{ publicacion.copete|safe }}</p>
+			{% if publicacion.cita_APA %}
+				<p><strong>Cita APA: </strong>{{ publicacion.cita_APA|safe }}</p>
 			{% endif %}
-			<p><strong>Resumen/Abstract: </strong>{{ publicacion.desarrollo|safe }}</p>
+			<p><strong>Resumen/Abstract: </strong>{{ publicacion.resumen_Abstract|safe }}</p>
 			{% if publicacion.video %}
 				<p><strong>Video: </strong>
-					{% if publicacion.video %}
-						<video name='video' controls autoplay width='50%' height='40%'>
-							<source src="{{ publicacion.video.url }}" type="video/mp4"></source>
-						</video>
-					{% endif %}
+					<video name='video' controls autoplay width='50%' height='40%'>
+						<source src="{{ publicacion.video.url }}" type="video/mp4"></source>
+					</video>
 				</p>
 			{% endif %}
 			{% if publicacion.archivo_set %}
@@ -59,6 +57,11 @@
 			{% if publicacion.link %}
 				<p><strong>Link: </strong>
 					<a target="_blank" href="{{publicacion.link}}">{{publicacion.link}}</a>
+				</p>
+			{% endif %}
+			{% if publicacion.doi %}
+				<p><strong>DOI: </strong>
+					<a target="_blank" href="{{publicacion.doi}}">{{publicacion.doi}}</a>
 				</p>
 			{% endif %}
 		</div>

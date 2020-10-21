@@ -30,10 +30,10 @@
 									{{ publicacion.titulo }}
 								</a>
 							</h5>
-							{% if publicacion.copete %}
-								<p>{{publicacion.copete|safe|truncatechars:"200"}}</p>
+							{% if publicacion.cita_APA %}
+								<p>{{publicacion.cita_APA|safe|truncatechars:"200"}}</p>
 							{% else %}
-								<p>{{publicacion.desarrollo|safe|truncatechars:"200"}}</p>
+								<p>{{publicacion.resumen_Abstract|safe|truncatechars:"200"}}</p>
 							{% endif %}
 							<p><a href="{{ publicacion.get_absolute_url }}">
 								<strong>Continuar leyendo...</strong> 
@@ -58,10 +58,10 @@
 									{{ novedad.titulo }}
 								</a>
 							</h5>
-							{% if novedad.copete %}
-								<p>{{novedad.copete|safe|truncatechars:"200"}}</p>
+							{% if novedad.cita_APA %}
+								<p>{{novedad.cita_APA|safe|truncatechars:"200"}}</p>
 							{% else %}
-								<p>{{novedad.desarrollo|safe|truncatechars:"200"}}</p>
+								<p>{{novedad.resumen_Abstract|safe|truncatechars:"200"}}</p>
 							{% endif %}
 							<p><a href="{{ novedad.get_absolute_url }}">
 								<strong>Continuar leyendo...</strong> 
@@ -74,34 +74,6 @@
 		{% else %}
 			<div class="alert alert-info">No existen publicaciones...</div>
 		{% endif %}
-
-		<!-- {% if novedades %}
-			{% for novedad in novedades %}
-				<div class="card col-md-3 novedades">
-					<div class="image-content">
-						<img alt="" src="{{ novedad.imagen.thumbnail.url }}" class="card-img-top img-thumbnail"/>
-					</div>
-					<div class="card-body">
-						<h5 class="card-title">
-							<a href="{{ novedad.get_absolute_url }}">
-								{{ novedad.titulo }}
-							</a>
-						</h5>
-						{% if novedad.copete %}
-							<p>{{novedad.copete|striptags|safe|truncatechars:"200"}}</p>
-						{% else %}
-							<p>{{novedad.desarrollo|striptags|safe|truncatechars:"200"}}</p>
-						{% endif %}
-						<p><a href="{{ novedad.get_absolute_url }}">
-							<strong>Continuar leyendo...</strong> 
-							</a>
-						</p>
-					</div>
-				</div>
-			{% endfor %}
-		{% else %}
-			<div class="alert alert-info">No existen novedades...</div>
-		{% endif %} -->
 	</div>
 </div>
 {% endblock %}

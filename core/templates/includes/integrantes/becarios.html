@@ -1,0 +1,26 @@
+<div style="clear: both;">
+	{% if investigador_list %}
+		{% for investigador in investigador_list %}
+		{% if investigador.tipo == "bec" %}
+			<div class="col-md-6 integrante" >
+				<a href="{{ investigador.get_absolute_url }}">
+					<div class="img-integrante col-md-6">
+						{% if investigador.avatar %}
+						<img src="{{ investigador.avatar.url }}" alt="Avatar" style="border-radius: 50%;">
+						{% else %}
+						<img src="/media/investigadores/img/avatar/nn.png" alt="Avatar">
+						{% endif %}
+					</div>
+					<div class="info-integrante col-md-6">
+						<h4>{{ investigador }}</h4>              
+						<p>{{ investigador.perfil }}</p>
+						<p>{{ investigador.get_tipo_display }}</p>
+					</div>
+				</a>
+			</div>
+		{% endif %}
+		{% endfor %}
+	{% else %}
+		<div class="alert alert-info">No existen investigadores...</div>
+	{% endif %}
+</div>

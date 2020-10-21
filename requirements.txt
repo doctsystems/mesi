@@ -1,3 +1,5 @@
+certifi==2020.6.20
+chardet==3.0.4
 dj-database-url==0.5.0
 Django==2.2.15
 django-ckeditor==5.9.0
@@ -7,6 +9,7 @@ django-stdimage==5.1.1
 django-unixtimestampfield==0.4.0
 django-userforeignkey==0.3.0
 et-xmlfile==1.0.1
+idna==2.10
 jdcal==1.4.1
 mysqlclient==2.0.1
 numpy==1.19.2
@@ -19,6 +22,8 @@ python-dateutil==2.8.1
 python-decouple==3.3
 python-utils==2.4.0
 pytz==2020.1
+requests==2.24.0
 six==1.15.0
 sqlparse==0.3.1
+urllib3==1.25.11
 xlrd==1.2.0

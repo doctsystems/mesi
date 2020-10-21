@@ -8,7 +8,7 @@ urlpatterns=[
 
 urlpatterns+=[
 	# path('publicaciones/', PublicacionesView.as_view(), name='publicaciones-list'),
-	path('publicaciones/<str:cat>', PublicacionesView, name='publicaciones-list'),
+	path('publicaciones/', PublicacionesView, name='publicaciones-list'),
 	path('publicacion/<int:pk>', PublicacionDetalleView.as_view(), name="publicacion-detalle"),
 	path('publicaciones/iiep/', PublicacionesIIEP, name='publicaciones-iiep'),
 	path('publicacion/iiep/<int:id>', PublicacionIIEPDetalle, name='publicacion-iiep-detalle'),
@@ -35,6 +35,6 @@ urlpatterns+=[
 
 urlpatterns+=[
 	# path('datos/', DatosView.as_view(), name='datos-list'),
-	path('datos/<str:cat>', DatosView, name='datos-list'),
+	path('datos/', DatosView, name='datos-list'),
 	path('dato/<int:pk>', DatoDetalleView.as_view(), name="dato-detalle"),
 ]
