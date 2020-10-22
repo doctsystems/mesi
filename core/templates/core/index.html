@@ -30,10 +30,11 @@
     </div>
 
 	<div class="col-md-4" >
-		<h3><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Actividades</h3>
+		<div class="actividades col-md-12 card">
+		<h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Actividades</h4>
 		{% if actividades %}
 			{% for actividad in actividades %}
-				<div class="actividades col-md-12 card">
+				
 					<span class="fecha">
 						<h4><a href="{{ actividad.get_absolute_url }}">{{actividad.titulo}}</a></h4>
 					</span>
