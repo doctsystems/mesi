@@ -81,3 +81,9 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.nav-tabs li a
+{
+    font-weight: bold;
+    text-transform: uppercase;
+}
