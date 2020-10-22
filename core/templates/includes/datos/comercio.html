@@ -4,13 +4,13 @@
 			{% if datos %}<!-- if publicaciones para la funcion def PublicacionesView-->
 				{% for dato in datos %}<!-- for publicacion in publicaciones -->
 				{% if dato.categoria == "com" %}
-					<div class="card col-md-3 datos">
-						<div class="card-body">
-							<h5 class="card-title">
+				<div  class="col-lg-4" style="min-height: 220px;">
+						
+							<h4  style="text-transform: uppercase;">
 								<a href="{{ dato.get_absolute_url }}">
 									{{ dato.titulo }}
 								</a>
-							</h5>
+							</h4>
 							<div class="date">
 								{% for autor in dato.autores.all %}
 									<span>{{ autor }},</span>
@@ -25,7 +25,7 @@
 								<strong>Continuar leyendo...</strong> 
 								</a>
 							</p>
-						</div>
+						
 					</div>
 				{% endif %}
 				{% endfor %}
