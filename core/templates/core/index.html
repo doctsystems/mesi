@@ -13,13 +13,13 @@
 		   <div class="jumbotron">
            	{% for conf in configuracion %}
 	              <h1 >MESi<br>
-	                <small>{{conf.titulo|truncatechars:"100"}}</small>      
+	                <small>{{conf.titulo|truncatechars:"200"}}</small>      
 	              </h1>
 	          
 	           {% if conf.copete %}
-					<p>{{conf.copete|safe|truncatechars:"200"}}</p>
+					<p>{{conf.copete|safe|truncatechars:"300"}}</p>
 				{% else %}
-					<p>{{conf.desarrollo|safe|truncatechars:"200"}}</p>
+					<p>{{conf.desarrollo|safe|truncatechars:"294"}}</p>
 				{% endif %}
 			{% endfor %}
 			<p><a class="btn btn-primary"  href="{% url 'core:institucional' %}" role="button">Seguir Leyendo &raquo;</a></p>

@@ -447,3 +447,12 @@ a {
     
     margin-bottom: 15px;
 }
+
+.jumbotron
+{
+    background-image: url(../img/bg.png);
+
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
