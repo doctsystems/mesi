@@ -6,16 +6,16 @@
 {% block content %}
 <ol class="breadcrumb">
 	<li><a href="{% url 'core:home' %}">Inicio</a></li>
-	<li><a href="{% url 'app:publicaciones-list'%}">Publicaciones MESI</a></li>
+	<li><a href="{% url 'app:publicaciones-list'%}">Publicaciones MESi</a></li>
 	<li class="active">{{ publicacion.titulo }}</li>
 </ol>
 
-<h1>{{ publicacion.titulo }}</h1>
+
 <hr>
 
 <div class="page-content row">
 	<div class="col-12" >
-		<div class="col-md-4">
+		<div class="col-md-4" style="display: none;">
 			<div class="image-content-detail">
 			{% if publicacion.imagen %}
 				<a href="{{ publicacion.imagen.url }}"><img alt="" src="{{ publicacion.imagen.url }}" class="card-img-top img-thumbnail"/></a>
@@ -24,8 +24,10 @@
 			{% endif %}
 			</div>
 		</div>
-		<div class="col-md-8 fecha-publicacion">
-			<p><strong>{{ publicacion.fecha }}</strong></p>
+		<div class="col-md-8 col-md-offset-2 " >
+			<h2 style="color: green;" >{{ publicacion.titulo }}</h2>
+			<h5><i>{{ publicacion.fecha }}</i></h5>
+
 			<p><strong>Autor/es: </strong>
 				{% for autor in publicacion.integrantes.all %}
 					<span>{{ autor }},</span>
