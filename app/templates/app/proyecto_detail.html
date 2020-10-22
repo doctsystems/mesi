@@ -23,13 +23,14 @@
 					{{ proyecto.fecha_final }}
 				{% endif %}
 			</p>
-		</div>
-		<div class="col-md-8 fecha-proyecto">
 			<p><strong>Autor/es: </strong>
 				{% for autor in proyecto.integrantes.all %}
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
+		</div>
+		<div class="col-md-8 fecha-proyecto">
+			
 			<p><strong>Cita APA: </strong>{{ proyecto.copete|safe }}</p>
 			<p><strong>Resumen/Abstract: </strong>{{ proyecto.desarrollo|safe }}</p>
 			<p><strong>Archivos: </strong>

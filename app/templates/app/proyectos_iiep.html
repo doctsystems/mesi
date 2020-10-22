@@ -18,8 +18,9 @@
   <div class="row">
     {% if proyectos %}
       {% for proyecto in proyectos %}
-        <div class="col-md-4">
-          <div class="card h-100">
+      <div  class="col-lg-4" style="min-height: 220px;">
+
+         
             <div class="card-body h-100">
             <h4>
               <a href="{{ proyecto.get_absolute_url }}">
@@ -33,7 +34,7 @@
                 Seguir leyendo...
               </a>
             </div>
-          </div>
+        
         </div>
       {% endfor %}
     {% endif %}
