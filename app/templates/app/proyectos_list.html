@@ -15,13 +15,12 @@
 	<div class="col-md-12">
 		{% if proyecto_list %}<!-- if publicaciones para la funcion def PublicacionesView-->
 			{% for proyecto in proyecto_list %}<!-- for publicacion in publicaciones -->
-				<div class="card col-md-3 proyectos">
-					<div class="card-body">
-						<h5 class="card-title">
+			<div  class="col-lg-4" style="min-height: 220px;">
+				<h4 style="text-transform: uppercase;">
 							<a href="{{ proyecto.get_absolute_url }}">
 								{{ proyecto.titulo }}
 							</a>
-						</h5>
+						</h4>
 						<div class="date">
 							{% for autor in proyecto.integrantes.all %}
 								<span>{{ autor }},</span>
@@ -37,7 +36,7 @@
 							</a>
 						</p>
 					</div>
-				</div>
+				
 			{% endfor %}
 		{% else %}
 			<div class="alert alert-info">No existen proyectos...</div>

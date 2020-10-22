@@ -1,5 +1,8 @@
 /*Navbar Styles*/
-
+.btn-primary
+{
+    color: white!important;
+}
 a {
     /*color: #000000;*/
     color:darkred!important;

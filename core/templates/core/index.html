@@ -6,13 +6,13 @@
 	<li><a href="/">Inicio</a></li>
 </ol>
 
-<div class="row home" >
+<div class="row " >
     <div class="col-md-8" >
         <div class="col-12" > 
            <div class="col-md-2" style="display: none;"><img src="{% static 'core/img/logo.jpg' %}" style="padding: 20% 0;" class="img-responsive" ></div>
-           <div class="col-md-12" >
+		   <div class="jumbotron">
            	{% for conf in configuracion %}
-	              <h1 style="margin-top: 0; padding-top:0;">MESi<br>
+	              <h1 >MESi<br>
 	                <small>{{conf.titulo|truncatechars:"100"}}</small>      
 	              </h1>
 	          
@@ -22,13 +22,48 @@
 					<p>{{conf.desarrollo|safe|truncatechars:"200"}}</p>
 				{% endif %}
 			{% endfor %}
-		</div>
-           <div class="line-custom hr" >
+			<p><a class="btn btn-primary"  href="{% url 'core:institucional' %}" role="button">Seguir Leyendo &raquo;</a></p>
+           <div class="line-custom hr" style="display: none;" >
                 <a href="{% url 'core:institucional' %}" class="pull-right">Seguir Leyendo<span class="glyphicon glyphicon-chevron-right"></span></a>
            </div>
-        </div>
-    </div>
-
+	   </div>
+	   <hr>
+	   <h3>Últimas publicaciones</h3>
+	 
+        {% if publicaciones %}
+        	{% for publicacion in publicaciones %}
+			<div class="col-lg-4">
+			       
+			       		<div class="image-content" style="display: none;">
+			       			{% if publicacion.imagen %}
+							<a href="{{ publicacion.get_absolute_url }}"><img alt="" src="{{ publicacion.imagen.thumbnail.url }}"/></a>
+							{% else %}
+								<a href="{{ publicacion.get_absolute_url }}">
+									<img class="img-thumbnail" src="/media/publicaciones/img/nn.png"/>
+								</a>
+			       			{% endif %}
+						</div>
+			          	<h5 style="text-transform: uppercase;" ><a href="{{ publicacion.get_absolute_url }}">
+			             	{{publicacion.titulo}}</a>
+			          	</h5>
+			          	<p >
+			            	{% for autor in publicacion.integrantes.all %}
+			            		<span>{{autor}},</span>
+			            	{% endfor %}
+						  </p>
+			          	{% if publicacion.copete %}
+							<p>{{publicacion.copete|striptags|safe|truncatechars:"200"}}</p>
+						{% else %}
+							<p>{{publicacion.desarrollo|striptags|safe|truncatechars:"200"}}</p>
+						{% endif %}
+			          	<p> <a href="{{ publicacion.get_absolute_url }}">
+			          		<strong>Seguir Leyendo...</strong></a>
+			          	</p>
+			       
+			    </div>
+		    {% endfor %}
+        {% endif %}
+    </div>  </div> 
 	<div class="col-md-4" >
 		<div class="actividades col-md-12 card">
 		<h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Actividades</h4>
@@ -38,6 +73,16 @@
 					<span class="fecha">
 						<h4><a href="{{ actividad.get_absolute_url }}">{{actividad.titulo}}</a></h4>
 					</span>
+					<span class="fecha">
+					{% if actividad.flyer %}
+					<a href="{{ actividad.flyer.url }}" target="_blank"><img 
+						src="{{ actividad.flyer.url }}" class="media-object img-responsive" />
+					</a>
+				{% else %}
+					<img src="/media/publicaciones/img/nn.png" alt="" class="media-object img-responsive">
+				{% endif %}	
+					</span>
+
 					<span class="fecha"><strong>{{actividad.fecha_inicio|date:'Y-m-d' }}</strong></span>
 					<div class="atividad-name-home"><strong>
 						<span>{{actividad.lugar}} </span></strong><br>
@@ -51,44 +96,7 @@
 		{% endif %}
 	</div>
 
-    <div class="col-md-8">
-        <!-- <h3>Ultimas publicaciones</h3> -->
-        {% if publicaciones %}
-        	{% for publicacion in publicaciones %}
-			    <div class="card col-md-4 ">
-			       	<div class="card-body">
-			       		<div class="image-content">
-			       			{% if publicacion.imagen %}
-							<a href="{{ publicacion.get_absolute_url }}"><img alt="" src="{{ publicacion.imagen.thumbnail.url }}"/></a>
-							{% else %}
-								<a href="{{ publicacion.get_absolute_url }}">
-									<img class="img-thumbnail" src="/media/publicaciones/img/nn.png"/>
-								</a>
-			       			{% endif %}
-						</div>
-			          	<h5 class="card-title">
-			             	{{publicacion.titulo}}
-			          	</h5>
-			          	<div class="date">
-			            	{% for autor in publicacion.integrantes.all %}
-			            		<span>{{autor}},</span>
-			            	{% endfor %}
-			          	</div>
-			          	{% if publicacion.copete %}
-							<p>{{publicacion.copete|striptags|safe|truncatechars:"200"}}</p>
-						{% else %}
-							<p>{{publicacion.desarrollo|striptags|safe|truncatechars:"200"}}</p>
-						{% endif %}
-			          	<p> <a href="{{ publicacion.get_absolute_url }}">
-			          		<strong>Seguir Leyendo...</strong></a>
-			          	</p>
-			       	</div>
-			    </div>
-		    {% endfor %}
-        {% endif %}
-    </div>
-   
-    <div class="col-md-4">
+    <div class="col-md-4" style="display: none;">
        <a class="twitter-timeline" data-height="450" data-theme="light" href="https://twitter.com/iiep_oficial?ref_src=twsrc%5Etfw">Tweets by iiep_oficial</a>
        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>

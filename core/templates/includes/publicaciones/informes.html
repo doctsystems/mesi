@@ -4,16 +4,16 @@
 			{% if publicaciones %}
 				{% for publicacion in publicaciones %}
 					{% if publicacion.categoria == "inf"%}
-						<div class="card col-md-4 publicaciones">
-							<div class="image-content">
+					<div  class="col-lg-4" style="min-height: 220px;">
+							<div class="image-content" style="display: none;">
 								{% if publicacion.imagen %}
 									<a href="{{ publicacion.imagen.url }}"><img alt="" src="{{ publicacion.imagen.url }}" class="card-img-top img-thumbnail"/></a>
 								{% else %}
 									<img src="/media/publicaciones/img/nn.png" alt="" class="card-img-top img-thumbnail">
 								{% endif %}
 							</div>
-							<div class="card-body">
-								<h4 class="card-title">
+						
+								<h4 style="text-transform: uppercase;">
 									<a href="{{ publicacion.get_absolute_url }}">
 										{{ publicacion.titulo }}
 									</a>
@@ -35,7 +35,7 @@
 									<strong>Continuar leyendo...</strong> 
 									</a>
 								</p>
-							</div>
+							
 						</div>
 					{% endif %}
 				{% endfor %}
