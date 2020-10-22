@@ -10,43 +10,57 @@
 	<li class="active">Contacto</li>
 </ol>
 
-<div >
+<div class="col-xs-12 col-sm-12 col-md-12">
     <!-- Formulario de contacto -->
     {% if 'ok' in request.GET %}
         <div class="alert alert-success alert-dismissible show" role="alert">
-          <strong>Holy guacamole!</strong> Mensaje enviado correctamente.
+          <strong>Felicidades!</strong> su mensaje fue enviado correctamente.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
     {% endif %}
-    <h3>Formulario de Contacto</h3><hr></br>
-    <form action="" method="POST" class="">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="name">Nombre *</label>
-            {{form.name}}
-            {% if form.name.errors%}
-                <div class="alert alert-danger" role="alert">{{form.name.errors}}</div>
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <label for="email">Email *</label>
-            {{form.email}}
-            {% if form.email.errors%}
-                <div class="alert alert-danger" role="alert">{{form.email.errors}}</div>
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <label for="text">Mensaje *</label>
-            {{form.content}}
-            {% if form.content.errors%}
-                <div class="alert alert-danger" role="alert">{{form.content.errors}}</div>
-            {% endif %}
-        </div>
-        <input type="submit" class="btn btn-primary btn-block py-2" value="Enviar">
-    </form>
+    <div class="col-sm-6 col-md-6">
+        <h3>Información de contacto</h3><hr><br>
+        <p>Instituto Interdisciplinario de Economía Política de Buenos Aires (CONICET-UBA) Facultad de Ciencias Económicas, Universidad de Buenos Aires</p>
+        <p><i class="glyphicon glyphicon-map-marker"></i> Av. Córdoba 2122 - 2do piso (C1120 AAQ) Ciudad Autónoma de Buenos Aires República Argentina</p>
+        <p><i class="glyphicon glyphicon-earphone"></i> Tel/fax: +54 11 5285-6578</p>
+        <p><i class="glyphicon glyphicon-envelope"></i> <a href="mailto:iiep-baires@fce.uba.ar">iiep-baires@fce.uba.ar</a></p>
+        <p><i class="fa fa-twitter"></i> Twitter: <a href="https://twitter.com/iiep_oficial">@iiep_oficial</a></p>
+         <p><i class="fa fa-instagram"></i> Instagram: <a href="https://www.instagram.com/iiep_oficial/">iiep_oficial</a></p>
 
+        <!-- <h3 style="padding-top: 50px; ">Cómo llegar</h3>
+        <hr>
+        <img src="http://webiiep.econ.uba.ar/images/como_llegar.png"> -->
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <h3>Formulario de Contacto</h3><hr><br>
+        <form action="" method="POST" class="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Nombre *</label>
+                {{form.name}}
+                {% if form.name.errors%}
+                    <div class="alert alert-danger" role="alert">{{form.name.errors}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                {{form.email}}
+                {% if form.email.errors%}
+                    <div class="alert alert-danger" role="alert">{{form.email.errors}}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="text">Mensaje *</label>
+                {{form.content}}
+                {% if form.content.errors%}
+                    <div class="alert alert-danger" role="alert">{{form.content.errors}}</div>
+                {% endif %}
+            </div>
+            <input type="submit" class="btn btn-primary btn-block py-2" value="Enviar">
+        </form>
+    </div>
 </div>
 
 {% endblock %}

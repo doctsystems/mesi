@@ -57,9 +57,9 @@ def Contacto(request):
 						<div id="appendonsend"></div>
 							<hr tabindex="-1">
 						<div>
-							<h2>De: %s</h2>
-							<p>Mensaje: %s</p>
-							<h5>Email de contacto: %s</h5>
+							<h2>De: %s</h2><br>
+							<p>Mensaje: %s</p><br>
+							<h5>Email de contacto: %s</h5><br>
 						</div>
 						<br>
 						<div id="Signature">
@@ -97,7 +97,7 @@ def Contacto(request):
 					</body>
 				</html>
 			    """ % (name, content, email)
-			email = EmailMessage('A new mail from AFISPOP', email_body, to=['doctsystems@gmail.com', 'd.cruz@outlook.com', 'carolinacosentinoalza@gmail.com'])
+			email = EmailMessage('A new mail from MESi', email_body, to=['mesi-iiep@fce.uba.ar', 'doctsystems@gmail.com'])
 			email.content_subtype = "html" # this is the crucial part 
 			# email.send()
 
