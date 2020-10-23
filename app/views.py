@@ -83,8 +83,8 @@ class DatoDetalleView(DetailView):
 	model = Dato
 
 def PublicacionesIIEP(request):
-	# publicacion = PublicacionIIEP.objects.using('iiep').all().filter(categoria_id=3).order_by('-id')
-	publicacion = PublicacionIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 89, 97])
+	# publicacion = PublicacionIIEP.objects.using('iiep').all().filter(categoria_id=3).order_by('-id')88, 89, 97, 132, 135, 196, 197
+	publicacion = PublicacionIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 89, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
 	paginator = Paginator(publicacion, 40)
 	try:
@@ -99,9 +99,9 @@ def PublicacionIIEPDetalle(request, id):
 	publicacion = PublicacionIIEP.objects.using('iiep').get(id=id)
 	contexto = {'publicacion': publicacion}
 	return render (request, 'app/publicacion_detail_iiep.html', contexto)
-
+from django.db.models import Count
 def ProyectosIIEP(request):
-	proyecto = ProyectoIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 89, 97])
+	proyecto = ProyectoIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 89, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
 	paginator = Paginator(proyecto, 20)
 	try:
@@ -110,6 +110,7 @@ def ProyectosIIEP(request):
 		proyectos = paginator.page(1)
 	except EmptyPage:
 		proyectos = paginator.page(paginator.num_pages)
+	print(proyectos)
 	return render(request, 'app/proyectos_iiep.html', {'proyectos':proyectos})
 
 def ProyectoIIEPDetalle(request, id):
@@ -118,7 +119,7 @@ def ProyectoIIEPDetalle(request, id):
 	return render(request, 'app/proyecto_detail_iiep.html', contexto)
 
 def ActividadesIIEP(request):
-	evento = ActividadIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 89, 97])
+	evento = ActividadIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 89, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
 	paginator = Paginator(evento, 20)
 	try:

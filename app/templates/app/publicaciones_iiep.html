@@ -23,6 +23,7 @@
 			</div>
 			<div class="card-body" style="height: 253px;overflow:hidden;">
 			  <h5 class="card-title"> <a href="{{ publicacion.get_absolute_url }}">{{publicacion.titulo_espanol}}</a></h5>
+            <p class="date">{{publicacion.id}}</p>
        		  <p class="date">{{publicacion.fecha|date:'Y-m-d'}}</p>
        		  <p class="card-text">{{publicacion.texto_espanol|safe}}</p>
 			</div>
