@@ -33,10 +33,12 @@
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
+			<div class="well">
 			{% if publicacion.cita_APA %}
-				<p><strong>Cita APA: </strong>{{ publicacion.cita_APA|safe }}</p>
+				<p>{{ publicacion.cita_APA|safe }}</p>
 			{% endif %}
-			<p><strong>Resumen/Abstract: </strong>{{ publicacion.resumen_Abstract|safe }}</p>
+		</div>
+			{{ publicacion.resumen_Abstract|safe }}</p>
 			{% if publicacion.video %}
 				<p><strong>Video: </strong>
 					<video name='video' controls autoplay width='50%' height='40%'>
@@ -45,7 +47,7 @@
 				</p>
 			{% endif %}
 			{% if publicacion.archivo_set %}
-				<p><strong>Archivos: </strong>
+				<p>
 					{% for file in publicacion.archivo_set.all %}
 						<a target="_blank" class="btn btn-default" role="button" href="{{ file.archivo.url }}">
 							<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo

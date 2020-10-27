@@ -22,9 +22,9 @@
 					<p>{{conf.desarrollo|safe|truncatechars:"294"}}</p>
 				{% endif %}
 			{% endfor %}
-			<p><a class="btn btn-primary"  href="{% url 'core:institucional' %}" role="button">Seguir Leyendo &raquo;</a></p>
+			<p><a class="btn btn-primary"  href="{% url 'core:institucional' %}" role="button">Continuar Leyendo &raquo;</a></p>
            <div class="line-custom hr" style="display: none;" >
-                <a href="{% url 'core:institucional' %}" class="pull-right">Seguir Leyendo<span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a href="{% url 'core:institucional' %}" class="pull-right">Continuar leyendo<span class="glyphicon glyphicon-chevron-right"></span></a>
            </div>
 	   </div>
 	   <hr>
@@ -57,7 +57,7 @@
 							<p>{{publicacion.desarrollo|striptags|safe|truncatechars:"200"}}</p>
 						{% endif %}
 			          	<p> <a href="{{ publicacion.get_absolute_url }}">
-			          		<strong>Seguir Leyendo...</strong></a>
+			          		<strong>Continuar leyendo...</strong></a>
 			          	</p>
 			       
 			    </div>

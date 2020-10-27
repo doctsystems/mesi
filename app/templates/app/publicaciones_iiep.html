@@ -21,14 +21,14 @@
 				<img class="card-img-top img-thumbnail" src="http://iiep-baires.econ.uba.ar/uploads/publicaciones/{{publicacion.id}}/imagenes/1_ficha.jpg" alt="Card image cap">
 <!-- ******************************************************************************************** -->
 			</div>
-			<div class="card-body" style="height: 253px;overflow:hidden;">
+			<div class="card-body" style="height: 230px;overflow:hidden;">
 			  <h5 class="card-title"> <a href="{{ publicacion.get_absolute_url }}">{{publicacion.titulo_espanol}}</a></h5>
-            <p class="date">{{publicacion.id}}</p>
+            <p class="date" style="display: none;">{{publicacion.id}}</p>
        		  <p class="date">{{publicacion.fecha|date:'Y-m-d'}}</p>
        		  <p class="card-text">{{publicacion.texto_espanol|safe}}</p>
 			</div>
 			<p> <a href="{{ publicacion.get_absolute_url }}">
-        		<strong>Leer más...</strong> 
+        		<strong>Continuar leyendo...</strong> 
       			</a>
            </p>
 		 </div>

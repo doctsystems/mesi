@@ -13,17 +13,17 @@
 								{% endif %}
 							</div>
 					
-								<h4 style="text-transform: uppercase;">
+								<h4 >
 									<a href="{{ publicacion.get_absolute_url }}">
 										{{ publicacion.titulo }}
 									</a>
 								</h4>
-								<h5 class="card-title">
+								<h5 class="card-title" style="display: none;">
 									Categoria: {{ publicacion.categoria }}
 								</h5>
-								<div class="date">
+								<div class="date">Autor/es: 
 									{% for autor in publicacion.integrantes.all %}
-										<span>{{ autor }},</span>
+										<span>{{ autor }} / </span>
 									{% endfor %}
 								</div>
 								{% if publicacion.copete %}

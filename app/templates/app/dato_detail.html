@@ -10,23 +10,27 @@
 	<li class="active">{{ dato.titulo }}</li>
 </ol>
 
-<h1>{{ dato.titulo }}</h1>
-<hr>
+
+
 
 <div class="page-content row">
 	<div class="col-12" >
-		<div class="col-md-4">
-			<p><strong>Fecha: </strong>{{ dato.fecha }}</p>
+		<div class="col-md-4" style="display: none;">
+			<p><strong> </strong>{{ dato.fecha }}</p>
 		</div>
-		<div class="col-md-8 fecha-dato">
+		<div class="col-md-8 col-md-offset-2 " >
+			<h2 style="color: green;">{{ dato.titulo }}</h2>
+			<p><em><strong> {{ dato.fecha }}</strong></em></p>
 			<p><strong>Autores: </strong>
 				{% for autor in dato.integrantes.all %}
 					<span>{{ autor }},</span>
 				{% endfor %}
 			</p>
-			<p><strong>Cita APA: </strong>{{ dato.cita_APA|safe }}</p>
+			<div class="well">
+			<p>{{ dato.cita_APA|safe }}</p>
+		</div>
 			<p><strong>Resumen/ Abstract: </strong>{{ dato.resumen_Abstract|safe }}</p>
-			<p><strong>Archivos: </strong>
+			<p>
 				{% for file in dato.archivo_set.all %}
 					<a target="_blank" class="btn btn-default" role="button" href="{{ file.archivo.url }}">
 						<i class="glyphicon glyphicon-download-alt"></i> Descargar archivo

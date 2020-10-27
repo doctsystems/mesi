@@ -16,7 +16,7 @@
 		{% if proyecto_list %}<!-- if publicaciones para la funcion def PublicacionesView-->
 			{% for proyecto in proyecto_list %}<!-- for publicacion in publicaciones -->
 			<div  class="col-lg-4" style="min-height: 220px;">
-				<h4 style="text-transform: uppercase;">
+				<h4 >
 							<a href="{{ proyecto.get_absolute_url }}">
 								{{ proyecto.titulo }}
 							</a>
