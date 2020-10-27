@@ -16,8 +16,9 @@
 	<div class="col-md-12">
   {% if eventos %}
 		{% for evento in eventos %}
-			<div class="col-md-7 col-md-offset-2" style="margin-bottom: 5px;">
-        <h4>Del <b>{{evento.fecha|timestamp_to_date}}</b> al 
+      <div class="col-md-7 col-md-offset-2" style="margin-bottom: 5px;">
+        <h4><b>{{evento.fecha|timestamp_to_date}}</b></h4>
+        <h4 style="display: none;">Del <b>{{evento.fecha|timestamp_to_date}}</b> al 
           {% if evento.fecha_hasta %}
             <b>{{evento.fecha_hasta|timestamp_to_date}}</b>
           {% else %}
