@@ -9,11 +9,13 @@
 	<li><a href="{% url 'app:proyectos-list' %}">Proyectos MESi</a></li>
 	<li class="active">{{ proyecto.titulo_espanol }}</li>
 </ol>
- <h1>{{proyecto.titulo_espanol}}</h1>
-<hr>
+ <hr>
+
 <div class="row">
 
-    <div class="col-md-12 "><p>{{proyecto.descripcion_espanol|safe}}</p> </div>
+    <div class="col-md-8 col-md-offset-2 " >
+        <h2 style="color: green;">{{proyecto.titulo_espanol}}</h2>
+        <p>{{proyecto.descripcion_espanol|safe}}</p> </div>
         
     <div class="col-md-12 " style="display: none;">
         <a class="btn btn-default" role="button" target="_blank" href="http://iiep-baires.econ.uba.ar/uploads/publicaciones/{{proyecto.id}}/archivos/1.pdf"><i class="glyphicon glyphicon-download-alt"></i>  Descargar archivo</a>
