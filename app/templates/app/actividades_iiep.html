@@ -17,7 +17,12 @@
   {% if eventos %}
 		{% for evento in eventos %}
       <div class="col-md-7 col-md-offset-2" style="margin-bottom: 5px;">
-        <h4><b>{{evento.fecha|timestamp_to_date}}</b></h4>
+        <h2><a href="{{ evento.get_absolute_url }}">{{evento.titulo_espanol}}</a> </h2>	
+        <h4>{{evento.fecha|timestamp_to_date}}<br>
+       
+            <span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{evento.hora}} Hs.<br>
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{evento.lugar}} </h4>
+            
         <h4 style="display: none;">Del <b>{{evento.fecha|timestamp_to_date}}</b> al 
           {% if evento.fecha_hasta %}
             <b>{{evento.fecha_hasta|timestamp_to_date}}</b>
@@ -25,13 +30,11 @@
             <b>{{evento.fecha|timestamp_to_date}}</b>
           {% endif %}
         </h4>
-				<h2><a href="{{ evento.get_absolute_url }}">{{evento.titulo_espanol}}</a> </h2>	
+			
 				<!-- <p>{{evento.texto_espanol|striptags|safe|truncatechars:"300"}}</p> -->
         <p>{{evento.texto_espanol|safe}}</p>
-				<p >
-          <span class="glyphicon glyphicon-time" aria-hidden="true"></span>{{evento.hora}} Hs.<br>
-          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{evento.lugar}} </p>
-				<p >--------------------------</p>
+        
+        <hr>
 			</div>
 		{% endfor %}
   {% endif %}

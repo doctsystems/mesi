@@ -9,12 +9,13 @@
     <li><a href="{% url 'app:actividades-iiep' %}">Actividades IIEP</a></li>
 	<li class="active">{{evento.titulo_espanol|safe}}</li>
   </ol>
-  <h1>{{evento.titulo_espanol|safe}}</h1>
+
 <hr>
 
 <div class="page-content row">
     <div class="col-12" >
-        <div class="col-md-8 col-md-offset-2 fecha-actividad">
+        <div class="col-md-8 col-md-offset-2 " >
+            <h2 style="color: green;">{{evento.titulo_espanol|safe}}</h2>
             <p>{{evento.texto_espanol|safe}}</p>
         </div>
         
