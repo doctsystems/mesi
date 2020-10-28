@@ -47,6 +47,7 @@ class Publicacion(models.Model):
 	investigador = models.ManyToManyField(Investigador, db_table="investigadores_publicaciones")
 
 	class Meta:
+		ordering = ['-fecha']
 		verbose_name_plural = "Publicaciones IIEP"
 		managed = False
 		db_table = 'publicaciones'
@@ -74,6 +75,7 @@ class Proyecto(models.Model):
 	investigador = models.ManyToManyField(Investigador, db_table="investigadores_proyectos")
 
 	class Meta:
+		ordering = ['-id']
 		verbose_name_plural = "Proyectos IIEP"
 		managed = False
 		db_table = 'proyectos'
@@ -108,6 +110,7 @@ class Evento(models.Model):
 	investigador = models.ManyToManyField(Investigador, db_table="evento_investigador")
 
 	class Meta:
+		ordering = ['-fecha']
 		verbose_name_plural = "Actividades IIEP"
 		managed = False
 		db_table = 'eventos'
@@ -117,3 +120,33 @@ class Evento(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('app:actividad-iiep-detalle', args=[str(self.id)])
+
+class Novedad(models.Model):
+	titulo_espanol = models.CharField(max_length=255, blank=True, null=True)
+	copete_espanol = models.CharField(max_length=255, blank=True, null=True)
+	texto_espanol = models.TextField(blank=True, null=True)
+	titulo_ingles = models.CharField(max_length=255, blank=True, null=True)
+	copete_ingles = models.CharField(max_length=255, blank=True, null=True)
+	texto_ingles = models.TextField(blank=True, null=True)
+	fecha = models.IntegerField(blank=True, null=True)
+	activo = models.IntegerField(blank=True, null=True)
+	destacado = models.IntegerField(blank=True, null=True)
+	orden = models.IntegerField(blank=True, null=True)
+	eliminado = models.IntegerField(blank=True, null=True)
+	creator_id = models.IntegerField(blank=True, null=True)
+	creator_date = models.IntegerField(blank=True, null=True)
+	last_update_id = models.IntegerField(blank=True, null=True)
+	last_update_date = models.IntegerField(blank=True, null=True)
+	investigador = models.ManyToManyField(Investigador, db_table="novedad_investigador")
+
+	class Meta:
+		ordering = ['-fecha']
+		verbose_name_plural = "Novedades IIEP"
+		managed = False
+		db_table = 'novedades'
+
+	def __str__(self):
+		return '{}'.format(self.titulo_espanol)
+
+	def get_absolute_url(self):
+		return reverse('app:novedad-iiep-detalle', args=[str(self.id)])

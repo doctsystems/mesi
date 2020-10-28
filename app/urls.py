@@ -31,6 +31,8 @@ urlpatterns+=[
 urlpatterns+=[
 	path('novedades/', NovedadesView, name='novedades-list'),
 	path('novedad/<int:pk>', NovedadDetalleView.as_view(), name="novedad-detalle"),
+	path('novedades/iiep', NovedadesIIEP, name='novedades-iiep'),
+	path('novedad/iiep/<int:id>', NovedadIIEPDetalle, name="novedad-iiep-detalle"),
 ]
 
 urlpatterns+=[

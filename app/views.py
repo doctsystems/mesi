@@ -3,8 +3,9 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import *
 from iiep.models import Investigador as InvestigadorIIEP, Publicacion as PublicacionIIEP
-from iiep.models import Proyecto as ProyectoIIEP, Evento as ActividadIIEP
+from iiep.models import Proyecto as ProyectoIIEP, Evento as ActividadIIEP, Novedad as NovedadIIEP
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 
 class InvestigadoresView(ListView):
 	model=Investigador
@@ -99,7 +100,7 @@ def PublicacionIIEPDetalle(request, id):
 	publicacion = PublicacionIIEP.objects.using('iiep').get(id=id)
 	contexto = {'publicacion': publicacion}
 	return render (request, 'app/publicacion_detail_iiep.html', contexto)
-from django.db.models import Count
+
 def ProyectosIIEP(request):
 	proyecto = ProyectoIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
@@ -134,3 +135,20 @@ def ActividadIIEPDetalle(request, id):
 	evento = ActividadIIEP.objects.using('iiep').get(id=id)
 	contexto = {'evento':evento}
 	return render (request, 'app/actividad_detail_iiep.html', contexto)
+
+def NovedadesIIEP(request):
+	novedad = NovedadIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
+	page = request.GET.get('page', 1)
+	paginator = Paginator(novedad, 20)
+	try:
+		novedades = paginator.page(page)
+	except PageNotAnInteger:
+		novedades = paginator.page(1)
+	except EmptyPage:
+		novedades = paginator.page(paginator.num_pages)
+	return render(request, 'app/novedades_iiep.html', {'novedades':novedades})
+
+def NovedadIIEPDetalle(request, id): 
+	novedad = NovedadIIEP.objects.using('iiep').get(id=id)
+	contexto = {'novedad':novedad}
+	return render (request, 'app/novedad_detail_iiep.html', contexto)

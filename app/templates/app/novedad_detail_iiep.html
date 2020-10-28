@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% load timetags %}
+
+{% block title %} MESi - Novedad IIEP {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="{% url 'core:home' %}">Inicio</a></li>
+    <li><a href="{% url 'app:novedades-iiep' %}">Novedades IIEP</a></li>
+
+	<li class="active">{{novedad.titulo_espanol}}</li>
+  </ol>
+  <h1>{{novedad.titulo_espanol}}</h1>
+<hr>
+
+<div class="page-content row">
+<div class="col-12" >
+
+    <div class="col-md-8 fecha-novedad">
+      
+        <p> <strong>{{novedad.fecha|timestamp_to_date}}</strong></p>
+        <hr>
+        <p>{{novedad.texto_espanol|safe}}</p>
+
+        <p>
+        <a target="_blank" class="btn btn-default" role="button" href="http://iiep-baires.econ.uba.ar/uploads/novedades/{{novedad.id}}/archivos/1.pdf"><i class="glyphicon glyphicon-download-alt"></i> Descargar archivo</a></p>
+    </div>
+    
+</div>
+
+</div>
+
+{% endblock %}

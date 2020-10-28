@@ -6,8 +6,8 @@ from django.template.defaultfilters import truncatechars
 
 class InvestigadorAdmin(admin.ModelAdmin):
 	exclude = ['estado']
-	ordering = ('nombres', 'apellidos')
-	list_display = ('foto', 'nombres', 'apellidos', 'tipo', 'link')
+	ordering = ('apellidos', )
+	list_display = ('foto', 'apellidos', 'nombres', 'tipo', )
 
 	def foto(self, obj):
 		if obj.avatar:
@@ -23,8 +23,8 @@ class ArchivoPublicacionInline(admin.StackedInline): #TabularInline
 
 class PublicacionAdmin(admin.ModelAdmin):
 	exclude = ['estado']
-	ordering = ('fecha', 'titulo')
-	list_display = ('titulo', 'fecha', 'pub_integrantes', )
+	ordering = ('-id', '-fecha', 'titulo')
+	list_display = ('id', 'titulo', 'fecha', )
 	search_fields = ('titulo','fecha','integrantes__nombres', 'integrantes__apellidos')
 	list_filter = ('fecha', 'integrantes__nombres','integrantes__apellidos')
 	filter_horizontal = ('integrantes', )

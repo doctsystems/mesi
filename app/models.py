@@ -27,11 +27,12 @@ class Investigador(ModeloBase):
 	link = models.URLField(max_length = 200, help_text="Link al perfil privado", null=True, blank=True)
 
 	class Meta:
+		ordering = ['apellidos', ]
 		verbose_name = "integrante"
 		verbose_name_plural = "Integrantes"
 
 	def __str__(self):
-		return '{} {}'.format(self.nombres, self.apellidos)
+		return '{}, {}'.format(self.apellidos, self.nombres)
 
 	def save(self):
 		self.nombres=self.nombres.upper()
@@ -66,6 +67,7 @@ class Publicacion(ModeloBase):
 	es_novedad = models.BooleanField(default=False)
 
 	class Meta:
+		ordering = ['-fecha', ]
 		verbose_name_plural = "Publicaciones MESI"
 
 	def __str__(self):
@@ -128,6 +130,7 @@ class Novedad(ModeloBase):
 	link = models.URLField(max_length = 200, help_text="Link de la presentacion")
 
 	class Meta:
+		ordering = ['-fecha', ]
 		verbose_name_plural = "Novedades"
 
 	def __str__(self):
@@ -156,6 +159,7 @@ class Dato(ModeloBase):
 	integrantes = models.ManyToManyField(Investigador)
 
 	class Meta:
+		ordering = ['-fecha', ]
 		verbose_name_plural = "Datos y Estadisticas"
 
 	def __str__(self):

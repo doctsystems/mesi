@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% load timetags %}
+
+{% block title %} MESi - Novedades IIEP {% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="/">Inicio</a></li>
+	<li class="active">Novedades IIEP</li>
+ </ol>
+  <h1>Novedades IIEP</h1>
+<hr>
+
+<div class="page-content row">
+	<div class="col-md-12">
+        {% if novedades %}
+			{% for novedad in novedades %}
+	           <div class="card col-md-3 novedades">
+				<div class="card-body" style="height: 230px;overflow:hidden;">
+				  <h5 class="card-title"> <a href="{{ novedad.get_absolute_url }}">{{novedad.titulo_espanol}}</a></h5>
+	              <p class="date" style="display: none;">{{novedad.id}}</p>
+	       		  <p class="date">{{novedad.fecha|timestamp_to_date}}</p>
+	       		  <hr>
+	       		  <p class="card-text">{{novedad.texto_espanol|safe}}</p>
+				</div>
+				<p> <a href="{{ novedad.get_absolute_url }}">
+	        		<strong>Continuar leyendo...</strong> 
+	      			</a>
+	           </p>
+			 </div>
+			{% endfor %}
+        {% else %}
+			<div class="alert alert-info">No existen novedades...</div>
+		{% endif %}
+
+    </div>
+</div>
+ <div class="row">
+        {% if novedades.has_other_pages %}
+      <ul class="pagination">
+        {% if novedades.has_previous %}
+          <li><a href="?page={{ novedades.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in novedades.paginator.page_range %}
+          {% if novedades.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if novedades.has_next %}
+          <li><a href="?page={{ novedades.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+    </div>
+{% endblock %}
