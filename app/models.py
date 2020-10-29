@@ -34,10 +34,10 @@ class Investigador(ModeloBase):
 	def __str__(self):
 		return '{}, {}'.format(self.apellidos, self.nombres)
 
-	def save(self):
-		self.nombres=self.nombres.upper()
-		self.apellidos=self.apellidos.upper()
-		super(Investigador, self).save()
+	# def save(self):
+	# 	self.nombres=self.nombres.upper()
+	# 	self.apellidos=self.apellidos.upper()
+	# 	super(Investigador, self).save()
 
 	def get_absolute_url(self):
 		return reverse('app:investigador-detalle', args=[str(self.id)])

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load timetags %}
 
 {% block title %} MESi - Publicaciones IIEP {% endblock %}
 
@@ -14,25 +15,25 @@
 <div class="page-content row">
 	<div class="col-md-12">
         {% if publicaciones %}
-		{% for publicacion in publicaciones %}
-           <div class="card col-md-3 publicaciones">
-			<div class="image-content">
-<!-- ******************************************************************************************** -->
-				<img class="card-img-top img-thumbnail" src="http://iiep-baires.econ.uba.ar/uploads/publicaciones/{{publicacion.id}}/imagenes/1_ficha.jpg" alt="Card image cap">
-<!-- ******************************************************************************************** -->
-			</div>
-			<div class="card-body" style="height: 230px;overflow:hidden;">
-			  <h5 class="card-title"> <a href="{{ publicacion.get_absolute_url }}">{{publicacion.titulo_espanol}}</a></h5>
-            <p class="date" style="display: none;">{{publicacion.id}}</p>
-       		  <p class="date">{{publicacion.fecha|date:'Y-m-d'}}</p>
-       		  <p class="card-text">{{publicacion.texto_espanol|safe}}</p>
-			</div>
-			<p> <a href="{{ publicacion.get_absolute_url }}">
-        		<strong>Continuar leyendo...</strong> 
-      			</a>
-           </p>
-		 </div>
-		{% endfor %}
+      		{% for publicacion in publicaciones %}
+            <!-- {{publicacion.dcount}} -->
+            <div class="card col-md-3 publicaciones">
+        			<div class="image-content">
+        				<img class="card-img-top img-thumbnail" src="http://iiep-baires.econ.uba.ar/uploads/publicaciones/{{publicacion.id}}/imagenes/1_ficha.jpg" alt="Card image cap">
+        			</div>
+      			<div class="card-body" style="height: 230px;overflow:hidden;">
+      			  <h5 class="card-title"> <a href="{{ publicacion.get_absolute_url }}">{{publicacion.titulo_espanol}}</a></h5>
+              <p class="date" style="display: none;">{{publicacion.id}}</p>
+         		  <p class="date">{{publicacion.fecha|timestamp_to_date}}</p>
+         		  <p class="card-text">{{publicacion.texto_espanol|safe}}</p>
+      			</div>
+      			<p> 
+              <a href="{{ publicacion.get_absolute_url }}">
+              	<strong>Continuar leyendo...</strong> 
+            	</a>
+            </p>
+      		 </div>
+      		{% endfor %}
         {% endif %}
 
     </div>

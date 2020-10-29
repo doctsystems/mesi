@@ -4,8 +4,10 @@ from django.urls import reverse
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from app.models import Actividad, Publicacion
+from iiep.models import Evento as ActividadIIEP
 from .forms import ContactForm
 from .models import SiteSettings
+from django.db.models import Count
 
 class HomePageView(TemplateView):
 	template_name = "core/index.html"
@@ -25,7 +27,8 @@ def InstitucionalPageView(request):
 
 def HomePageView(request):
 	template_name="core/index.html"
-	actividades = Actividad.objects.all()[:4]
+	actividades = ActividadIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))[:4]
+	# actividades = Actividad.objects.all()[:4]
 	publicaciones = Publicacion.objects.all()[:3]
 	configuracion = SiteSettings.objects.all()[:1]
 	context = {'actividades':actividades, 'publicaciones':publicaciones, 'configuracion':configuracion}

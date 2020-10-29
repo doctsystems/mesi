@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load timetags %}
 
 {% block content %}
 <ol class="breadcrumb">
@@ -66,34 +67,39 @@
     </div>  </div> 
 	<div class="col-md-4" >
 		<div class="actividades col-md-12 card">
-		<h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Actividades</h4>
-		{% if actividades %}
-			{% for actividad in actividades %}
-				
+			<h4>
+				<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Actividades
+			</h4>
+			{% if actividades %}
+				{% for actividad in actividades %}
 					<span class="fecha">
-						<h4><a href="{{ actividad.get_absolute_url }}">{{actividad.titulo}}</a></h4>
+						<h4><a href="{{ actividad.get_absolute_url }}">{{actividad.titulo_espanol}}</a></h4>
 					</span>
+					<!-- <span class="fecha">
+						{% if actividad.imagen %}
+							<a href="{{ actividad.imagen.url }}" target="_blank"><img 
+								src="{{ actividad.imagen.url }}" class="media-object img-responsive" />
+							</a>
+						{% else %}
+							<img src="/media/publicaciones/img/nn.png" alt="" class="media-object img-responsive">
+						{% endif %}	
+					</span> -->
 					<span class="fecha">
-					{% if actividad.flyer %}
-					<a href="{{ actividad.flyer.url }}" target="_blank"><img 
-						src="{{ actividad.flyer.url }}" class="media-object img-responsive" />
-					</a>
-				{% else %}
-					<img src="/media/publicaciones/img/nn.png" alt="" class="media-object img-responsive">
-				{% endif %}	
+						<strong>
+							{{actividad.fecha|timestamp_to_date}}, 
+							{{actividad.hora}}
+						</strong>
 					</span>
-
-					<span class="fecha"><strong>{{actividad.fecha_inicio|date:'Y-m-d' }}</strong></span>
 					<div class="atividad-name-home"><strong>
 						<span>{{actividad.lugar}} </span></strong><br>
 						<span aria-hidden="true">
-							{{actividad.desarrollo|striptags|safe|truncatechars:"100"}}
+							{{actividad.texto_espanol|striptags|safe|truncatechars:"100"}}
 						</span><br>             
 					</div>
-				<hr>
-				</div>
-			{% endfor %}
-		{% endif %}
+					<hr>
+				{% endfor %}
+			{% endif %}
+		</div>
 	</div>
 
     <div class="col-md-4" style="display: none;">

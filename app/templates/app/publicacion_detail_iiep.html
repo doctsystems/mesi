@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load timetags %}
 
 {% block title %} MESi - Publicacion IIEP {% endblock %}
 
@@ -23,7 +24,7 @@
 
     <div class="col-md-8 fecha-publicacion">
       
-        <p> <strong>{{publicacion.fecha|date:'Y-m-d'}}</strong></p>
+        <p> <strong>{{publicacion.fecha|timestamp_to_date}}</strong></p>
         <p>{{publicacion.texto_espanol|safe}}</p>
 
         <p>

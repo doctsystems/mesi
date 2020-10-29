@@ -87,7 +87,7 @@ def PublicacionesIIEP(request):
 	# publicacion = PublicacionIIEP.objects.using('iiep').all().filter(categoria_id=3).order_by('-id')88, 89, 97, 132, 135, 196, 197
 	publicacion = PublicacionIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
-	paginator = Paginator(publicacion, 40)
+	paginator = Paginator(publicacion, 20)
 	try:
 		publicaciones = paginator.page(page)
 	except PageNotAnInteger:
