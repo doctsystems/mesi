@@ -85,7 +85,7 @@ class DatoDetalleView(DetailView):
 
 def PublicacionesIIEP(request):
 	# publicacion = PublicacionIIEP.objects.using('iiep').all().filter(categoria_id=3).order_by('-id')88, 89, 97, 132, 135, 196, 197
-	publicacion = PublicacionIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
+	publicacion = PublicacionIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 93, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
 	paginator = Paginator(publicacion, 20)
 	try:
@@ -102,7 +102,7 @@ def PublicacionIIEPDetalle(request, id):
 	return render (request, 'app/publicacion_detail_iiep.html', contexto)
 
 def ProyectosIIEP(request):
-	proyecto = ProyectoIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
+	proyecto = ProyectoIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 93, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
 	paginator = Paginator(proyecto, 20)
 	try:
@@ -120,7 +120,7 @@ def ProyectoIIEPDetalle(request, id):
 	return render(request, 'app/proyecto_detail_iiep.html', contexto)
 
 def ActividadesIIEP(request):
-	evento = ActividadIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
+	evento = ActividadIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 93, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
 	paginator = Paginator(evento, 20)
 	try:
@@ -137,7 +137,7 @@ def ActividadIIEPDetalle(request, id):
 	return render (request, 'app/actividad_detail_iiep.html', contexto)
 
 def NovedadesIIEP(request):
-	novedad = NovedadIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
+	novedad = NovedadIIEP.objects.using('iiep').all().filter(investigador__id__in=[88, 93, 97, 132, 135, 196, 197]).annotate(dcount=Count('investigador__id'))
 	page = request.GET.get('page', 1)
 	paginator = Paginator(novedad, 20)
 	try:
